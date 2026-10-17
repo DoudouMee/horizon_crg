@@ -1,0 +1,459 @@
+{
+  "type": "block",
+  "uuid": "fa96a61b-9300-5b03-a303-b52e730c254d",
+  "name": "CRG demonstration",
+  "net_class_default": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+  "net_classes": {
+    "ab6387e7-96a1-508c-8a30-ee8fd8e33197": {
+      "name": "default"
+    }
+  },
+  "nets": {
+    "f93e62ec-b32f-554c-93a1-8f591517335b": {
+      "name": "xtal",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "ac782be5-e22a-5b69-8d05-ad22bd7cc2b3": {
+      "name": "lock",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "02108faa-b451-5242-a2bc-d5ce35766bea": {
+      "name": "pll",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "87e1cd84-a829-5e96-9f60-e3cd3195efe0": {
+      "name": "test_clk",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "43a4d0c9-b5ee-5c9d-b8a8-ba47a185b305": {
+      "name": "test_mode",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "5c6539a7-250e-5da6-9c5f-eccb91ce5c3f": {
+      "name": "selected",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "87f32e5e-fbf3-5672-be3c-f7bd45c3c9ad": {
+      "name": "div_cfg",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "3719be89-94e8-5634-a2b8-8f022567d6d1": {
+      "name": "divided",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "32d8707b-c66b-5d62-bf2b-de1b02045090": {
+      "name": "clk_en",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "e052ac89-4731-54c6-81b8-2d79103fb668": {
+      "name": "scan_enable",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "51352d8e-dc32-5f94-8254-5600952c490d": {
+      "name": "core_clk",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "2d09f4fd-30bc-517d-939c-4813d71e3a1c": {
+      "name": "por_n",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    },
+    "b7035127-8bd2-56db-ab69-10e3ee5fb315": {
+      "name": "core_rst_n",
+      "net_class": "ab6387e7-96a1-508c-8a30-ee8fd8e33197",
+      "is_power": false
+    }
+  },
+  "buses": {},
+  "components": {
+    "fea223de-0830-5d1a-ba98-1f34be98b075": {
+      "entity": "c748cd15-a5d9-50ea-b0ae-b20df61a1b3c",
+      "refdes": "XTAL",
+      "value": "clock_source",
+      "connections": {
+        "fd412326-b28b-5d2e-bf91-2fffd8fa2852/c018aa15-6979-5eb0-bcd3-c710c92cd1f1": {
+          "net": "f93e62ec-b32f-554c-93a1-8f591517335b"
+        }
+      },
+      "crg": {
+        "kind": "clock_source",
+        "ports": {
+          "out": "fd412326-b28b-5d2e-bf91-2fffd8fa2852/c018aa15-6979-5eb0-bcd3-c710c92cd1f1"
+        },
+        "parameters": {
+          "frequency_hz": 24000000
+        }
+      }
+    },
+    "d710337d-fd1a-5ce2-a717-14fac1551f6b": {
+      "entity": "b500bfd8-d5c5-5b3a-bced-aad908df686f",
+      "refdes": "LOCK",
+      "value": "control_source",
+      "connections": {
+        "0ef4ec4b-8977-5aa6-aaaf-3be928759d67/97e8e816-9499-5fc1-afd9-71b16a8ede3c": {
+          "net": "ac782be5-e22a-5b69-8d05-ad22bd7cc2b3"
+        }
+      },
+      "crg": {
+        "kind": "control_source",
+        "ports": {
+          "out": "0ef4ec4b-8977-5aa6-aaaf-3be928759d67/97e8e816-9499-5fc1-afd9-71b16a8ede3c"
+        },
+        "parameters": {
+          "key": "pll_lock",
+          "values": [
+            1
+          ],
+          "binding": "tb.pll_locked"
+        }
+      }
+    },
+    "4229c890-314c-527e-84d4-9a1927e0b1fb": {
+      "entity": "f3c7d25c-5676-52b3-946b-3799ac777ade",
+      "refdes": "PLL",
+      "value": "pll",
+      "connections": {
+        "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/3ced4f23-be10-5fb2-905a-782d5ebe860f": {
+          "net": "f93e62ec-b32f-554c-93a1-8f591517335b"
+        },
+        "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/f3e5aef1-628e-5f36-ab57-1b042e7969f2": {
+          "net": "ac782be5-e22a-5b69-8d05-ad22bd7cc2b3"
+        },
+        "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/a3d5c17e-6cdf-5051-93da-52f1866613df": {
+          "net": "02108faa-b451-5242-a2bc-d5ce35766bea"
+        }
+      },
+      "crg": {
+        "kind": "pll",
+        "ports": {
+          "in": "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/3ced4f23-be10-5fb2-905a-782d5ebe860f",
+          "lock": "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/f3e5aef1-628e-5f36-ab57-1b042e7969f2",
+          "out": "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5/a3d5c17e-6cdf-5051-93da-52f1866613df"
+        },
+        "parameters": {
+          "multiply": 20,
+          "divide": 1
+        }
+      }
+    },
+    "0d07ab30-9c70-5f10-a4ff-9f47855d95d8": {
+      "entity": "30fe2a3e-b4d9-52e5-bee0-9bb0c325c929",
+      "refdes": "TCLK",
+      "value": "clock_source",
+      "connections": {
+        "50760355-7617-58db-8da1-a75e6d7800aa/ffaa05a6-7232-5f9e-b791-ad5994425ef8": {
+          "net": "87e1cd84-a829-5e96-9f60-e3cd3195efe0"
+        }
+      },
+      "crg": {
+        "kind": "clock_source",
+        "ports": {
+          "out": "50760355-7617-58db-8da1-a75e6d7800aa/ffaa05a6-7232-5f9e-b791-ad5994425ef8"
+        },
+        "parameters": {
+          "frequency_hz": 50000000
+        }
+      }
+    },
+    "1518dd2f-81ca-5fdc-9689-51ba740b5835": {
+      "entity": "6063f41e-1ec9-57a7-8c8a-a6cacdde8193",
+      "refdes": "TMODE",
+      "value": "control_source",
+      "connections": {
+        "82c794e7-cc08-560e-82af-9ce4c8268dfa/8edaea27-b0cd-564e-96ed-b4bb2bdac31a": {
+          "net": "43a4d0c9-b5ee-5c9d-b8a8-ba47a185b305"
+        }
+      },
+      "crg": {
+        "kind": "control_source",
+        "ports": {
+          "out": "82c794e7-cc08-560e-82af-9ce4c8268dfa/8edaea27-b0cd-564e-96ed-b4bb2bdac31a"
+        },
+        "parameters": {
+          "key": "test_mode",
+          "values": [
+            0,
+            1
+          ],
+          "binding": "tb.test_mode"
+        }
+      }
+    },
+    "1af17c2d-e690-574a-a017-1da35c4fdc3a": {
+      "entity": "b9fb553a-645b-5ecb-9bd2-8258120f099e",
+      "refdes": "MUX",
+      "value": "mux",
+      "connections": {
+        "f97568fe-1cbe-521c-96a4-d73f08254779/bb8ebed7-d8c6-5899-ae93-fa45a8b57ef6": {
+          "net": "02108faa-b451-5242-a2bc-d5ce35766bea"
+        },
+        "f97568fe-1cbe-521c-96a4-d73f08254779/17af933e-3278-5f30-a456-b37430e104ca": {
+          "net": "87e1cd84-a829-5e96-9f60-e3cd3195efe0"
+        },
+        "f97568fe-1cbe-521c-96a4-d73f08254779/2be50fb3-23bb-50c6-9bb9-ab2f5e0f88cf": {
+          "net": "43a4d0c9-b5ee-5c9d-b8a8-ba47a185b305"
+        },
+        "f97568fe-1cbe-521c-96a4-d73f08254779/15c4615e-cfc8-5ba8-bb28-0d1d0859e08e": {
+          "net": "5c6539a7-250e-5da6-9c5f-eccb91ce5c3f"
+        }
+      },
+      "crg": {
+        "kind": "mux",
+        "ports": {
+          "in0": "f97568fe-1cbe-521c-96a4-d73f08254779/bb8ebed7-d8c6-5899-ae93-fa45a8b57ef6",
+          "in1": "f97568fe-1cbe-521c-96a4-d73f08254779/17af933e-3278-5f30-a456-b37430e104ca",
+          "sel": "f97568fe-1cbe-521c-96a4-d73f08254779/2be50fb3-23bb-50c6-9bb9-ab2f5e0f88cf",
+          "out": "f97568fe-1cbe-521c-96a4-d73f08254779/15c4615e-cfc8-5ba8-bb28-0d1d0859e08e"
+        },
+        "parameters": {
+          "select_map": {
+            "0": "in0",
+            "1": "in1"
+          },
+          "switch_protocol": "Stop affected clocks, change test_mode, restart and wait for stability"
+        }
+      }
+    },
+    "e4d77594-6959-5d45-a477-cb6f22a4c4f4": {
+      "entity": "142ac2f6-49fe-5fb8-9a4e-afe0fb1a8cf9",
+      "refdes": "CFG",
+      "value": "control_source",
+      "connections": {
+        "8f28ee84-8f29-59a6-bd56-14cabfb9be74/c9c54db9-6841-5514-8a32-29acb5d9554c": {
+          "net": "87f32e5e-fbf3-5672-be3c-f7bd45c3c9ad"
+        }
+      },
+      "crg": {
+        "kind": "control_source",
+        "ports": {
+          "out": "8f28ee84-8f29-59a6-bd56-14cabfb9be74/c9c54db9-6841-5514-8a32-29acb5d9554c"
+        },
+        "parameters": {
+          "key": "div_cfg",
+          "values": [
+            0,
+            1
+          ],
+          "binding": "reg.CRG_DIV[0]"
+        }
+      }
+    },
+    "d43d7eff-a150-5af7-87c9-4f9b86c3ab25": {
+      "entity": "06561c2c-ffa8-5e7c-b502-b831ff764a11",
+      "refdes": "DIV",
+      "value": "divider",
+      "connections": {
+        "9c1934d6-3265-5b1f-a1a8-65b12deffb93/2c213662-4df9-5e86-b7e6-e03171aaa7e1": {
+          "net": "5c6539a7-250e-5da6-9c5f-eccb91ce5c3f"
+        },
+        "9c1934d6-3265-5b1f-a1a8-65b12deffb93/ecfb4656-2bca-5c4d-b184-844c494619e2": {
+          "net": "87f32e5e-fbf3-5672-be3c-f7bd45c3c9ad"
+        },
+        "9c1934d6-3265-5b1f-a1a8-65b12deffb93/e3489e4e-e941-5174-a13e-b46fc40c2bdc": {
+          "net": "3719be89-94e8-5634-a2b8-8f022567d6d1"
+        }
+      },
+      "crg": {
+        "kind": "divider",
+        "ports": {
+          "in": "9c1934d6-3265-5b1f-a1a8-65b12deffb93/2c213662-4df9-5e86-b7e6-e03171aaa7e1",
+          "cfg": "9c1934d6-3265-5b1f-a1a8-65b12deffb93/ecfb4656-2bca-5c4d-b184-844c494619e2",
+          "out": "9c1934d6-3265-5b1f-a1a8-65b12deffb93/e3489e4e-e941-5174-a13e-b46fc40c2bdc"
+        },
+        "parameters": {
+          "divide_map": {
+            "0": 2,
+            "1": 4
+          }
+        }
+      }
+    },
+    "9cedea85-69ef-5005-874d-2d8f2ad2c95d": {
+      "entity": "4532ce0b-533e-5ab2-9e94-9408fe71a18c",
+      "refdes": "EN",
+      "value": "control_source",
+      "connections": {
+        "1c2f1773-1ac3-5b3c-9152-1bdfd2c3f6de/6ad55ce2-6ec7-555d-b3d4-ecb8ee083573": {
+          "net": "32d8707b-c66b-5d62-bf2b-de1b02045090"
+        }
+      },
+      "crg": {
+        "kind": "control_source",
+        "ports": {
+          "out": "1c2f1773-1ac3-5b3c-9152-1bdfd2c3f6de/6ad55ce2-6ec7-555d-b3d4-ecb8ee083573"
+        },
+        "parameters": {
+          "key": "clk_en",
+          "values": [
+            0,
+            1
+          ],
+          "binding": "reg.CRG_EN[0]"
+        }
+      }
+    },
+    "bcf9bbf0-6883-500f-bd86-36ae76c5b4d4": {
+      "entity": "df48e7db-e782-56c1-b180-b7ff9b6e79cc",
+      "refdes": "SCAN",
+      "value": "control_source",
+      "connections": {
+        "a57a47e2-5673-5ca8-a351-1fae3fa91ed3/398fa332-1ae8-53ff-b2ea-3ae2c1f6855f": {
+          "net": "e052ac89-4731-54c6-81b8-2d79103fb668"
+        }
+      },
+      "crg": {
+        "kind": "control_source",
+        "ports": {
+          "out": "a57a47e2-5673-5ca8-a351-1fae3fa91ed3/398fa332-1ae8-53ff-b2ea-3ae2c1f6855f"
+        },
+        "parameters": {
+          "key": "scan_enable",
+          "values": [
+            0,
+            1
+          ],
+          "binding": "tb.scan_enable"
+        }
+      }
+    },
+    "1003642f-a584-54bc-a8cb-167c44e88be7": {
+      "entity": "b950e18f-bab1-5ee0-b8db-e892ed913a6f",
+      "refdes": "ICG",
+      "value": "gate",
+      "connections": {
+        "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/faa9ef59-6467-5de5-b7f5-325f4f22ae4a": {
+          "net": "3719be89-94e8-5634-a2b8-8f022567d6d1"
+        },
+        "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/d5192aae-8ca5-5aa1-bf7c-d69f9d488dcf": {
+          "net": "32d8707b-c66b-5d62-bf2b-de1b02045090"
+        },
+        "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/2369f040-e838-5213-b27c-a891790e10fd": {
+          "net": "e052ac89-4731-54c6-81b8-2d79103fb668"
+        },
+        "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/56ed33dd-2bad-534f-b5d1-a601447dcbd2": {
+          "net": "51352d8e-dc32-5f94-8254-5600952c490d"
+        }
+      },
+      "crg": {
+        "kind": "gate",
+        "ports": {
+          "in": "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/faa9ef59-6467-5de5-b7f5-325f4f22ae4a",
+          "en": "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/d5192aae-8ca5-5aa1-bf7c-d69f9d488dcf",
+          "test_en": "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/2369f040-e838-5213-b27c-a891790e10fd",
+          "out": "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b/56ed33dd-2bad-534f-b5d1-a601447dcbd2"
+        },
+        "parameters": {}
+      }
+    },
+    "55f93195-8e4b-5a65-b61e-17ad9d453c91": {
+      "entity": "e57bc9fc-66bd-58a0-aeb0-82bc463bccf1",
+      "refdes": "CORE_CLK",
+      "value": "clock_output",
+      "connections": {
+        "5073f8d5-58f9-5309-976d-36e7cae2ea33/d7ce339f-60af-5130-ae35-3202ffdd4368": {
+          "net": "51352d8e-dc32-5f94-8254-5600952c490d"
+        }
+      },
+      "crg": {
+        "kind": "clock_output",
+        "ports": {
+          "in": "5073f8d5-58f9-5309-976d-36e7cae2ea33/d7ce339f-60af-5130-ae35-3202ffdd4368"
+        },
+        "parameters": {
+          "binding": "dut.core_clk"
+        }
+      }
+    },
+    "403d795d-881f-5e56-8eb5-d3e2f36a0ab1": {
+      "entity": "ba6c9815-8e2d-5ce4-9c4f-ac1a437cc8bc",
+      "refdes": "POR",
+      "value": "reset_source",
+      "connections": {
+        "0dd3b1eb-3100-53a6-b66b-e942cb962deb/4acaf461-f28f-5655-9ff2-832ea8e4b9e4": {
+          "net": "2d09f4fd-30bc-517d-939c-4813d71e3a1c"
+        }
+      },
+      "crg": {
+        "kind": "reset_source",
+        "ports": {
+          "out": "0dd3b1eb-3100-53a6-b66b-e942cb962deb/4acaf461-f28f-5655-9ff2-832ea8e4b9e4"
+        },
+        "parameters": {
+          "key": "por_n",
+          "values": [
+            0,
+            1
+          ],
+          "active_level": 0,
+          "binding": "tb.por_n"
+        }
+      }
+    },
+    "57333912-864a-5294-9f5d-4fa23859bc1a": {
+      "entity": "65aec532-c0cf-57d6-b60e-0750b78704bb",
+      "refdes": "RSTSYNC",
+      "value": "reset_sync",
+      "connections": {
+        "9b9c6fa4-dd85-59df-beba-9632cf4914e8/a332f423-0329-52a9-bbb1-30486e32bb93": {
+          "net": "2d09f4fd-30bc-517d-939c-4813d71e3a1c"
+        },
+        "9b9c6fa4-dd85-59df-beba-9632cf4914e8/96041197-5ea7-59d3-b7c6-5a06609f6a73": {
+          "net": "51352d8e-dc32-5f94-8254-5600952c490d"
+        },
+        "9b9c6fa4-dd85-59df-beba-9632cf4914e8/f76f52ac-c67e-54ea-b602-4fdc37f27f3f": {
+          "net": "b7035127-8bd2-56db-ab69-10e3ee5fb315"
+        }
+      },
+      "crg": {
+        "kind": "reset_sync",
+        "ports": {
+          "in": "9b9c6fa4-dd85-59df-beba-9632cf4914e8/a332f423-0329-52a9-bbb1-30486e32bb93",
+          "clk": "9b9c6fa4-dd85-59df-beba-9632cf4914e8/96041197-5ea7-59d3-b7c6-5a06609f6a73",
+          "out": "9b9c6fa4-dd85-59df-beba-9632cf4914e8/f76f52ac-c67e-54ea-b602-4fdc37f27f3f"
+        },
+        "parameters": {
+          "input_active_level": 0,
+          "output_active_level": 0,
+          "stages": 2,
+          "async_assert": true
+        }
+      }
+    },
+    "3f8a28ee-d595-5c15-8553-6e2bdf08c86a": {
+      "entity": "6af00ce1-c589-5b31-80b1-f72dcb64bff7",
+      "refdes": "CORE_RST",
+      "value": "reset_output",
+      "connections": {
+        "20e49852-8348-529d-b46a-911b01418778/68d72b3a-c657-5550-9d82-db8cf909e8e3": {
+          "net": "b7035127-8bd2-56db-ab69-10e3ee5fb315"
+        }
+      },
+      "crg": {
+        "kind": "reset_output",
+        "ports": {
+          "in": "20e49852-8348-529d-b46a-911b01418778/68d72b3a-c657-5550-9d82-db8cf909e8e3"
+        },
+        "parameters": {
+          "binding": "dut.core_rst_n"
+        }
+      }
+    }
+  },
+  "block_instances": {},
+  "project_meta": {
+    "project_name": "crg-demo",
+    "project_title": "CRG verification demonstration",
+    "crg.modes": "{\"functional\": {\"test_mode\": 0, \"scan_enable\": 0}, \"dft_shift\": {\"test_mode\": 1, \"scan_enable\": 1}, \"dft_capture\": {\"test_mode\": 1, \"scan_enable\": 0}}"
+  }
+}

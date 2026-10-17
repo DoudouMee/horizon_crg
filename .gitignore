@@ -46,3 +46,12 @@ wix/version.wxi
 .idea
 compile_commands.json
 *.kate-swp
+
+# CRG user documentation is source-controlled despite the generated docs directory.
+!docs/
+docs/*
+!docs/crg.md
+examples/crg/demo/pool/*.db
+examples/crg/demo/pool/*.db-*
+acceptance/
+validation/

@@ -123,6 +123,8 @@ build_dependencies_imp = build_dependencies_libhorizonui +[rsvg, podofo, libarch
 
 src_common = files(
     'src/block/block.cpp',
+    'src/crg/analysis.cpp',
+    'src/crg/native.cpp',
     'src/block/block_instance.cpp',
     'src/block/bom.cpp',
     'src/block/bom_export_settings.cpp',
@@ -579,6 +581,7 @@ src_imp = files(
     'src/imp/imp_package.cpp',
     'src/imp/imp_padstack.cpp',
     'src/imp/imp_schematic.cpp',
+    'src/imp/imp_schematic_crg.cpp',
     'src/imp/imp_search.cpp',
     'src/imp/imp_symbol.cpp',
     'src/imp/keyseq_dialog.cpp',
@@ -1038,3 +1041,21 @@ horizon_tests = executable('horizon-tests',
 )
 
 test('tests', horizon_tests)
+
+# Headless CRG export shares the exact same analysis engine as the schematic editor.
+horizon_crg = executable('horizon-crg',
+    'src/crg/main.cpp', 'src/crg/analysis.cpp',
+    include_directories: include_directories,
+    cpp_args: cpp_args,
+    install: true,
+)
+
+crg_tests = executable('horizon-crg-tests', 'src/crg/test_analysis.cpp', 'src/crg/analysis.cpp',
+    include_directories: include_directories, cpp_args: cpp_args, build_by_default: false)
+test('crg-analysis', crg_tests, args: [meson.current_source_dir() / 'examples/crg/demo/blocks.json',
+                                   meson.current_source_dir() / 'examples/crg/demo/pool'])
+
+horizon_crg_native = executable('horizon-crg-native', ['src/crg/native_main.cpp', src_pool_update, resources],
+    dependencies: build_dependencies_pool_prj_mgr,
+    link_with: [clipper_nopic, libhorizon], include_directories: include_directories,
+    cpp_args: cpp_args, install: true)

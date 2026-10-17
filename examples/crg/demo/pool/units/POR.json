@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "10cf1953-c40e-509c-9118-deaefeb31c75",
+  "name": "POR",
+  "manufacturer": "",
+  "pins": {
+    "4acaf461-f28f-5655-9ff2-832ea8e4b9e4": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

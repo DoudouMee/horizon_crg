@@ -1,0 +1,8 @@
+{
+  "type": "pool",
+  "uuid": "bab4536b-09cc-5e66-9b60-2dc2c0337f3b",
+  "name": "CRG verification primitives",
+  "default_via": "00000000-0000-0000-0000-000000000000",
+  "default_frame": "00000000-0000-0000-0000-000000000000",
+  "pools_included": []
+}

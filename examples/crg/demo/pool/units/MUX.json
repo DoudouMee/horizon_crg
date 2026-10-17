@@ -1,0 +1,24 @@
+{
+  "type": "unit",
+  "uuid": "28d05085-cd3d-5634-9037-3d1e1edb4b1d",
+  "name": "MUX",
+  "manufacturer": "",
+  "pins": {
+    "bb8ebed7-d8c6-5899-ae93-fa45a8b57ef6": {
+      "primary_name": "in0",
+      "direction": "input"
+    },
+    "17af933e-3278-5f30-a456-b37430e104ca": {
+      "primary_name": "in1",
+      "direction": "input"
+    },
+    "2be50fb3-23bb-50c6-9bb9-ab2f5e0f88cf": {
+      "primary_name": "sel",
+      "direction": "input"
+    },
+    "15c4615e-cfc8-5ba8-bb28-0d1d0859e08e": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

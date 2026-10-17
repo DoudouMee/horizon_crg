@@ -1,0 +1,20 @@
+{
+  "type": "unit",
+  "uuid": "ba0a9b50-fffc-5dec-97f5-bff38da991c4",
+  "name": "PLL",
+  "manufacturer": "",
+  "pins": {
+    "3ced4f23-be10-5fb2-905a-782d5ebe860f": {
+      "primary_name": "in",
+      "direction": "input"
+    },
+    "f3e5aef1-628e-5f36-ab57-1b042e7969f2": {
+      "primary_name": "lock",
+      "direction": "input"
+    },
+    "a3d5c17e-6cdf-5051-93da-52f1866613df": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

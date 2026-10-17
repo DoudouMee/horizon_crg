@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "e57bc9fc-66bd-58a0-aeb0-82bc463bccf1",
+  "name": "CORE_CLK",
+  "prefix": "U",
+  "gates": {
+    "5073f8d5-58f9-5309-976d-36e7cae2ea33": {
+      "name": "A",
+      "suffix": "",
+      "unit": "019ab1bd-85fb-522a-ba4c-3fdb9d1b86a8"
+    }
+  }
+}

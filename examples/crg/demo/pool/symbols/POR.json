@@ -1,0 +1,101 @@
+{
+  "type": "symbol",
+  "uuid": "a417e64a-39c3-58ca-b091-c61b77b09c03",
+  "unit": "10cf1953-c40e-509c-9118-deaefeb31c75",
+  "name": "POR",
+  "pins": {
+    "4acaf461-f28f-5655-9ff2-832ea8e4b9e4": {
+      "position": [
+        10000000,
+        0
+      ],
+      "length": 2500000,
+      "orientation": "left",
+      "pad_visible": false
+    }
+  },
+  "junctions": {
+    "10334437-9496-5939-97a2-f466ff099d0a": {
+      "position": [
+        -7500000,
+        -10000000
+      ]
+    },
+    "063eddac-e8bb-51fe-a79b-7e00481d27fe": {
+      "position": [
+        7500000,
+        -10000000
+      ]
+    },
+    "74c5267c-d995-5632-be46-38371dba7675": {
+      "position": [
+        7500000,
+        10000000
+      ]
+    },
+    "38d61514-1fc2-5818-a854-a9854b47de17": {
+      "position": [
+        -7500000,
+        10000000
+      ]
+    }
+  },
+  "lines": {
+    "78372786-4156-5f4a-b21b-3a87f5cdab75": {
+      "from": "10334437-9496-5939-97a2-f466ff099d0a",
+      "to": "063eddac-e8bb-51fe-a79b-7e00481d27fe",
+      "width": 180000,
+      "layer": 0
+    },
+    "cc61c333-040e-5a37-b925-91847f7aa791": {
+      "from": "063eddac-e8bb-51fe-a79b-7e00481d27fe",
+      "to": "74c5267c-d995-5632-be46-38371dba7675",
+      "width": 180000,
+      "layer": 0
+    },
+    "feacf32d-ec4c-5f21-a761-06d5a8534b61": {
+      "from": "74c5267c-d995-5632-be46-38371dba7675",
+      "to": "38d61514-1fc2-5818-a854-a9854b47de17",
+      "width": 180000,
+      "layer": 0
+    },
+    "1c7a8e0f-c505-50ae-8feb-afdde6b49a60": {
+      "from": "38d61514-1fc2-5818-a854-a9854b47de17",
+      "to": "10334437-9496-5939-97a2-f466ff099d0a",
+      "width": 180000,
+      "layer": 0
+    }
+  },
+  "texts": {
+    "cc6386b7-5b5d-5956-b436-bbd5066dde20": {
+      "text": "$REFDES",
+      "placement": {
+        "shift": [
+          0,
+          12000000
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1800000,
+      "width": 0,
+      "layer": 0
+    },
+    "14fda112-6e98-5258-90eb-4063d9daf147": {
+      "text": "reset_source",
+      "placement": {
+        "shift": [
+          0,
+          0
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1500000,
+      "width": 0,
+      "layer": 0
+    }
+  }
+}

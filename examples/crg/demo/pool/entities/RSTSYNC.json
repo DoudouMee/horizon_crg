@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "65aec532-c0cf-57d6-b60e-0750b78704bb",
+  "name": "RSTSYNC",
+  "prefix": "U",
+  "gates": {
+    "9b9c6fa4-dd85-59df-beba-9632cf4914e8": {
+      "name": "A",
+      "suffix": "",
+      "unit": "4266fcf7-e05a-5733-88a7-0f9ff8244219"
+    }
+  }
+}

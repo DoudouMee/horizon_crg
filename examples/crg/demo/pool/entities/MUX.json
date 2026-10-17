@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "b9fb553a-645b-5ecb-9bd2-8258120f099e",
+  "name": "MUX",
+  "prefix": "U",
+  "gates": {
+    "f97568fe-1cbe-521c-96a4-d73f08254779": {
+      "name": "A",
+      "suffix": "",
+      "unit": "28d05085-cd3d-5634-9037-3d1e1edb4b1d"
+    }
+  }
+}

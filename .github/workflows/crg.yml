@@ -1,0 +1,48 @@
+name: CRG Linux build and acceptance
+on:
+  push:
+    branches: ['crg/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build and UI test dependencies
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y build-essential meson ninja-build cmake libsqlite3-dev util-linux librsvg2-dev libcairomm-1.0-dev libepoxy-dev libgtkmm-3.0-dev uuid-dev libzmq3-dev cppzmq-dev libglm-dev libgit2-dev libcurl4-gnutls-dev libocct-data-exchange-dev libocct-draw-dev occt-misc libpodofo-dev python3-dev libarchive-dev libspnav-dev xvfb xdotool imagemagick dbus-x11
+      - name: Build native editor and CRG tools
+        run: |
+          meson setup build --buildtype=debugoptimized
+          meson compile -C build -j 2 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
+      - name: Analyze and verify native load, expand, save and reopen
+        run: |
+          mkdir -p acceptance
+          ./build/horizon-crg-tests examples/crg/demo/blocks.json examples/crg/demo/pool
+          ./build/horizon-crg examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/demo
+          ./build/horizon-crg-native examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/roundtrip
+      - name: Native editor UI smoke test
+        run: xvfb-run -a -s '-screen 0 1600x1000x24 +extension GLX' dbus-run-session -- python3 scripts/crg/gui_smoke.py
+        env:
+          LIBGL_ALWAYS_SOFTWARE: '1'
+      - name: Package Linux build with example and usage
+        run: |
+          mkdir -p dist/horizon-crg-linux/bin dist/horizon-crg-linux/examples
+          cp build/horizon-{eda,imp,crg,crg-native} dist/horizon-crg-linux/bin/
+          cp -a examples/crg/demo dist/horizon-crg-linux/examples/
+          cp docs/crg.md dist/horizon-crg-linux/README.md
+          cp scripts/crg/open-demo.sh dist/horizon-crg-linux/
+          tar -czf dist/horizon-crg-linux-ubuntu22.04.tar.gz -C dist horizon-crg-linux
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: crg-linux-${{ github.sha }}
+          path: |
+            dist/*.tar.gz
+            acceptance/
+            build/meson-logs/meson-log.txt
+            build/meson-logs/testlog.txt

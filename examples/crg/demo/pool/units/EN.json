@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "cf8c46ed-72f1-59e0-8f98-c8d65274af54",
+  "name": "EN",
+  "manufacturer": "",
+  "pins": {
+    "6ad55ce2-6ec7-555d-b3d4-ecb8ee083573": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

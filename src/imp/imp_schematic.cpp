@@ -627,6 +627,11 @@ void ImpSchematic::construct()
     hamburger_menu->append("Project properties", "win.prj_properties");
     add_tool_action(ToolID::EDIT_PROJECT_PROPERTIES, "prj_properties");
 
+    hamburger_menu->append("CRG component properties…", "win.crg_properties");
+    main_window->add_action("crg_properties", [this] { edit_crg_component(); });
+    hamburger_menu->append("CRG verification analysis…", "win.crg_analysis");
+    main_window->add_action("crg_analysis", [this] { show_crg_report(); });
+
     hamburger_menu->append("Export BOM…", "win.bom_export");
     main_window->add_action("bom_export", [this] { trigger_action(ActionID::BOM_EXPORT_WINDOW); });
 

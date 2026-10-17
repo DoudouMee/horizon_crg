@@ -1,0 +1,24 @@
+{
+  "type": "unit",
+  "uuid": "4d1b7c69-4522-59ab-8150-166ce044ba18",
+  "name": "ICG",
+  "manufacturer": "",
+  "pins": {
+    "faa9ef59-6467-5de5-b7f5-325f4f22ae4a": {
+      "primary_name": "in",
+      "direction": "input"
+    },
+    "d5192aae-8ca5-5aa1-bf7c-d69f9d488dcf": {
+      "primary_name": "en",
+      "direction": "input"
+    },
+    "2369f040-e838-5213-b27c-a891790e10fd": {
+      "primary_name": "test_en",
+      "direction": "input"
+    },
+    "56ed33dd-2bad-534f-b5d1-a601447dcbd2": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

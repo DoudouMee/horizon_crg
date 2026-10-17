@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "b500bfd8-d5c5-5b3a-bced-aad908df686f",
+  "name": "LOCK",
+  "prefix": "U",
+  "gates": {
+    "0ef4ec4b-8977-5aa6-aaaf-3be928759d67": {
+      "name": "A",
+      "suffix": "",
+      "unit": "93a704eb-5fdb-57ad-b641-2a1b11f01673"
+    }
+  }
+}

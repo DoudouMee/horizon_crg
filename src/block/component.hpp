@@ -1,6 +1,6 @@
 #pragma once
 #include "common/common.hpp"
-#include "nlohmann/json_fwd.hpp"
+#include "nlohmann/json.hpp"
 #include "net.hpp"
 #include "util/uuid.hpp"
 #include "util/uuid_path.hpp"
@@ -49,6 +49,8 @@ public:
     std::shared_ptr<const class Part> part = nullptr;
     std::string refdes;
     std::string value;
+    // CRG semantics travel with the native component through save, undo and copy/paste.
+    json crg = json::object();
     UUID group;
     UUID tag;
     bool nopopulate = false;

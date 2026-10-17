@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "019ab1bd-85fb-522a-ba4c-3fdb9d1b86a8",
+  "name": "CORE_CLK",
+  "manufacturer": "",
+  "pins": {
+    "d7ce339f-60af-5130-ae35-3202ffdd4368": {
+      "primary_name": "in",
+      "direction": "input"
+    }
+  }
+}

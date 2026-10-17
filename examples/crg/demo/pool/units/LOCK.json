@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "93a704eb-5fdb-57ad-b641-2a1b11f01673",
+  "name": "LOCK",
+  "manufacturer": "",
+  "pins": {
+    "97e8e816-9499-5fc1-afd9-71b16a8ede3c": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

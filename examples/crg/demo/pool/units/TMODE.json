@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "0255268d-c81d-5fbf-9123-2507f3e604cc",
+  "name": "TMODE",
+  "manufacturer": "",
+  "pins": {
+    "8edaea27-b0cd-564e-96ed-b4bb2bdac31a": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

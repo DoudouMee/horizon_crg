@@ -1,0 +1,20 @@
+{
+  "type": "unit",
+  "uuid": "4ef0bdd0-8a05-5ce7-9b19-047826802cad",
+  "name": "DIV",
+  "manufacturer": "",
+  "pins": {
+    "2c213662-4df9-5e86-b7e6-e03171aaa7e1": {
+      "primary_name": "in",
+      "direction": "input"
+    },
+    "ecfb4656-2bca-5c4d-b184-844c494619e2": {
+      "primary_name": "cfg",
+      "direction": "input"
+    },
+    "e3489e4e-e941-5174-a13e-b46fc40c2bdc": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

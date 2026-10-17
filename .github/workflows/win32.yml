@@ -53,9 +53,29 @@ jobs:
       run: |
         meson setup build
         meson compile -C build
+    - name: CRG acceptance tests
+      if: startsWith(github.ref, 'refs/heads/crg/')
+      shell: msys2 {0}
+      run: |
+        meson compile -C build horizon-crg-tests
+        ./build/horizon-crg-tests.exe examples/crg/demo/blocks.json examples/crg/demo/pool
+        mkdir -p acceptance
+        ./build/horizon-crg.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/demo
+        ./build/horizon-crg-native.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/roundtrip
     - name: Make dist
       shell: msys2 {0}
       run: ./make_bindist.sh
+    - name: Add CRG examples and tools
+      if: startsWith(github.ref, 'refs/heads/crg/')
+      shell: msys2 {0}
+      run: |
+        cp build/horizon-crg.exe build/horizon-crg-native.exe dist/horizon/bin/
+        mkdir -p dist/horizon/examples
+        cp -a examples/crg/demo dist/horizon/examples/
+        cp docs/crg.md dist/horizon/README-CRG.md
+        cp scripts/crg/open-demo.bat dist/horizon/
+        cd dist
+        zip -r horizon-crg-windows.zip horizon
     - name: Check for missing DLLs
       shell: msys2 {0}
       run: ./check_dll.sh
@@ -63,13 +83,12 @@ jobs:
       shell: msys2 {0}
       run: echo "artifact_name=horizon-win64-$(date +%Y-%m-%d-%H%M)-$(echo ${{ github.ref_name }} | tr / -)" >> $GITHUB_ENV
     - name: deploy to selfnet mirror
-      if: github.event_name != 'pull_request'
+      if: github.repository_owner == 'horizon-eda' && github.event_name != 'pull_request'
       shell: msys2 {0}
       run: |
         RSYNC_PASSWORD=${{ secrets.RSYNC_PASSWORD }} rsync -avz --stats dist/*.zip rsync://horizon-eda@mirror-1.server.selfnet.de/horizon-eda/win64-ci/${{ env.artifact_name }}.zip
         echo "::notice title=Download this build::Get the zip archive from the selfnet mirror: https://mirror.selfnet.de/horizon-eda/win64-ci/${{ env.artifact_name }}.zip"
     - uses: actions/upload-artifact@v4
-      if: github.event_name == 'pull_request'
       with:
         name: ${{ env.artifact_name }}
         path: dist/*.zip

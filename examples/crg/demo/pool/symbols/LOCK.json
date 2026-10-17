@@ -1,0 +1,101 @@
+{
+  "type": "symbol",
+  "uuid": "a946c32b-bba2-51ff-ac07-476fe9e505b9",
+  "unit": "93a704eb-5fdb-57ad-b641-2a1b11f01673",
+  "name": "LOCK",
+  "pins": {
+    "97e8e816-9499-5fc1-afd9-71b16a8ede3c": {
+      "position": [
+        10000000,
+        0
+      ],
+      "length": 2500000,
+      "orientation": "left",
+      "pad_visible": false
+    }
+  },
+  "junctions": {
+    "208124f2-90bd-55e9-84a7-8faf1c85e10a": {
+      "position": [
+        -7500000,
+        -10000000
+      ]
+    },
+    "af6f5d04-6c3b-55a6-a4e0-8dfd809c8c42": {
+      "position": [
+        7500000,
+        -10000000
+      ]
+    },
+    "6d2faa2b-790c-5476-9d1c-37f74fed7db7": {
+      "position": [
+        7500000,
+        10000000
+      ]
+    },
+    "4a93e240-8c10-5103-8e88-9cd3cdb80e26": {
+      "position": [
+        -7500000,
+        10000000
+      ]
+    }
+  },
+  "lines": {
+    "5e434ad5-d538-5de9-90f1-d5c99ce2354c": {
+      "from": "208124f2-90bd-55e9-84a7-8faf1c85e10a",
+      "to": "af6f5d04-6c3b-55a6-a4e0-8dfd809c8c42",
+      "width": 180000,
+      "layer": 0
+    },
+    "137f48ef-4486-5a22-a6f3-23e3f9871eb7": {
+      "from": "af6f5d04-6c3b-55a6-a4e0-8dfd809c8c42",
+      "to": "6d2faa2b-790c-5476-9d1c-37f74fed7db7",
+      "width": 180000,
+      "layer": 0
+    },
+    "49f878f0-4ef0-555b-aa4d-cf78a072cab6": {
+      "from": "6d2faa2b-790c-5476-9d1c-37f74fed7db7",
+      "to": "4a93e240-8c10-5103-8e88-9cd3cdb80e26",
+      "width": 180000,
+      "layer": 0
+    },
+    "eac62c91-aeeb-5dc1-a69f-61864ba0667c": {
+      "from": "4a93e240-8c10-5103-8e88-9cd3cdb80e26",
+      "to": "208124f2-90bd-55e9-84a7-8faf1c85e10a",
+      "width": 180000,
+      "layer": 0
+    }
+  },
+  "texts": {
+    "6fdb12af-852f-5aa9-bc5d-98df4061e020": {
+      "text": "$REFDES",
+      "placement": {
+        "shift": [
+          0,
+          12000000
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1800000,
+      "width": 0,
+      "layer": 0
+    },
+    "ca4b2e0d-3193-5271-ab75-e8709e5aee1c": {
+      "text": "control_source",
+      "placement": {
+        "shift": [
+          0,
+          0
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1500000,
+      "width": 0,
+      "layer": 0
+    }
+  }
+}

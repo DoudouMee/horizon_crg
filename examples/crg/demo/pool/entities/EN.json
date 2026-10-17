@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "4532ce0b-533e-5ab2-9e94-9408fe71a18c",
+  "name": "EN",
+  "prefix": "U",
+  "gates": {
+    "1c2f1773-1ac3-5b3c-9152-1bdfd2c3f6de": {
+      "name": "A",
+      "suffix": "",
+      "unit": "cf8c46ed-72f1-59e0-8f98-c8d65274af54"
+    }
+  }
+}

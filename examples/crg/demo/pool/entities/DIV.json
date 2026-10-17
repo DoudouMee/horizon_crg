@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "06561c2c-ffa8-5e7c-b502-b831ff764a11",
+  "name": "DIV",
+  "prefix": "U",
+  "gates": {
+    "9c1934d6-3265-5b1f-a1a8-65b12deffb93": {
+      "name": "A",
+      "suffix": "",
+      "unit": "4ef0bdd0-8a05-5ce7-9b19-047826802cad"
+    }
+  }
+}

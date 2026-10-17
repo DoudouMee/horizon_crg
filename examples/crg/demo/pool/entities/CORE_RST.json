@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "6af00ce1-c589-5b31-80b1-f72dcb64bff7",
+  "name": "CORE_RST",
+  "prefix": "U",
+  "gates": {
+    "20e49852-8348-529d-b46a-911b01418778": {
+      "name": "A",
+      "suffix": "",
+      "unit": "1ad1c34c-5a46-59e8-8188-9f7771b0be6b"
+    }
+  }
+}

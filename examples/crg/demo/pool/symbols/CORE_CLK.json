@@ -1,0 +1,101 @@
+{
+  "type": "symbol",
+  "uuid": "6e672cdb-7d8d-587f-998e-d771bc2d0b3e",
+  "unit": "019ab1bd-85fb-522a-ba4c-3fdb9d1b86a8",
+  "name": "CORE_CLK",
+  "pins": {
+    "d7ce339f-60af-5130-ae35-3202ffdd4368": {
+      "position": [
+        -10000000,
+        0
+      ],
+      "length": 2500000,
+      "orientation": "right",
+      "pad_visible": false
+    }
+  },
+  "junctions": {
+    "ee55dc30-e7cd-568e-addb-34c729c4d97e": {
+      "position": [
+        -7500000,
+        -10000000
+      ]
+    },
+    "b6860868-7200-5427-a4a4-a1f2da4a0d58": {
+      "position": [
+        7500000,
+        -10000000
+      ]
+    },
+    "d63bd0f4-6b34-5692-b14c-a34406565017": {
+      "position": [
+        7500000,
+        10000000
+      ]
+    },
+    "6a8c357f-a5e5-583a-82fd-5d10c0be3215": {
+      "position": [
+        -7500000,
+        10000000
+      ]
+    }
+  },
+  "lines": {
+    "a48d06c8-1799-544f-a0e8-ba5d7a7cc257": {
+      "from": "ee55dc30-e7cd-568e-addb-34c729c4d97e",
+      "to": "b6860868-7200-5427-a4a4-a1f2da4a0d58",
+      "width": 180000,
+      "layer": 0
+    },
+    "2d1ce797-5e8a-56ec-9868-c59a8bf1c03a": {
+      "from": "b6860868-7200-5427-a4a4-a1f2da4a0d58",
+      "to": "d63bd0f4-6b34-5692-b14c-a34406565017",
+      "width": 180000,
+      "layer": 0
+    },
+    "07a1860b-7841-5c0d-bd3c-04ce52f1ea59": {
+      "from": "d63bd0f4-6b34-5692-b14c-a34406565017",
+      "to": "6a8c357f-a5e5-583a-82fd-5d10c0be3215",
+      "width": 180000,
+      "layer": 0
+    },
+    "3fcd9cef-fc8e-5bc3-b4aa-f1f3198159cb": {
+      "from": "6a8c357f-a5e5-583a-82fd-5d10c0be3215",
+      "to": "ee55dc30-e7cd-568e-addb-34c729c4d97e",
+      "width": 180000,
+      "layer": 0
+    }
+  },
+  "texts": {
+    "b1cff426-61e3-5ad6-893c-58ef557ed462": {
+      "text": "$REFDES",
+      "placement": {
+        "shift": [
+          0,
+          12000000
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1800000,
+      "width": 0,
+      "layer": 0
+    },
+    "5c598d99-35ea-5237-99ed-80b656eeb52a": {
+      "text": "clock_output",
+      "placement": {
+        "shift": [
+          0,
+          0
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1500000,
+      "width": 0,
+      "layer": 0
+    }
+  }
+}

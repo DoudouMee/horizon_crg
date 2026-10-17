@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "df48e7db-e782-56c1-b180-b7ff9b6e79cc",
+  "name": "SCAN",
+  "prefix": "U",
+  "gates": {
+    "a57a47e2-5673-5ca8-a351-1fae3fa91ed3": {
+      "name": "A",
+      "suffix": "",
+      "unit": "2b596ae9-1061-5f2a-b897-558cfe6c4218"
+    }
+  }
+}

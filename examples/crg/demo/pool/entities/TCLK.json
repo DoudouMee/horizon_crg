@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "30fe2a3e-b4d9-52e5-bee0-9bb0c325c929",
+  "name": "TCLK",
+  "prefix": "U",
+  "gates": {
+    "50760355-7617-58db-8da1-a75e6d7800aa": {
+      "name": "A",
+      "suffix": "",
+      "unit": "b85f6a36-ef0c-5957-b622-09d971c12106"
+    }
+  }
+}

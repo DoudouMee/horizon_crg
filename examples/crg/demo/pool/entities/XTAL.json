@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "c748cd15-a5d9-50ea-b0ae-b20df61a1b3c",
+  "name": "XTAL",
+  "prefix": "U",
+  "gates": {
+    "fd412326-b28b-5d2e-bf91-2fffd8fa2852": {
+      "name": "A",
+      "suffix": "",
+      "unit": "7263ebc1-b2bd-5ed5-9791-27ba56745761"
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "type": "symbol",
+  "uuid": "6f02e171-1c98-51f9-a78c-3bbecf2f7c3a",
+  "unit": "e45d8c75-3ab0-5b5e-a859-7a02a086f26a",
+  "name": "CFG",
+  "pins": {
+    "c9c54db9-6841-5514-8a32-29acb5d9554c": {
+      "position": [
+        10000000,
+        0
+      ],
+      "length": 2500000,
+      "orientation": "left",
+      "pad_visible": false
+    }
+  },
+  "junctions": {
+    "b9ad0278-3bb8-532c-8a68-f74d09060a74": {
+      "position": [
+        -7500000,
+        -10000000
+      ]
+    },
+    "fa893b56-08db-5a24-8347-b0c91b592a91": {
+      "position": [
+        7500000,
+        -10000000
+      ]
+    },
+    "0f0c4c6d-4716-5f64-b53e-c2599282c705": {
+      "position": [
+        7500000,
+        10000000
+      ]
+    },
+    "38396c3d-397e-5607-a49e-6ee9b552cd67": {
+      "position": [
+        -7500000,
+        10000000
+      ]
+    }
+  },
+  "lines": {
+    "255408b9-0a03-57d7-864a-ff1d3333f5b2": {
+      "from": "b9ad0278-3bb8-532c-8a68-f74d09060a74",
+      "to": "fa893b56-08db-5a24-8347-b0c91b592a91",
+      "width": 180000,
+      "layer": 0
+    },
+    "b5355cdc-44df-555d-937b-a79ceba9ec46": {
+      "from": "fa893b56-08db-5a24-8347-b0c91b592a91",
+      "to": "0f0c4c6d-4716-5f64-b53e-c2599282c705",
+      "width": 180000,
+      "layer": 0
+    },
+    "3b44d3cd-0337-55ba-85f7-e7be0cbfe538": {
+      "from": "0f0c4c6d-4716-5f64-b53e-c2599282c705",
+      "to": "38396c3d-397e-5607-a49e-6ee9b552cd67",
+      "width": 180000,
+      "layer": 0
+    },
+    "61c8d784-42e5-5058-837b-90ecb5722156": {
+      "from": "38396c3d-397e-5607-a49e-6ee9b552cd67",
+      "to": "b9ad0278-3bb8-532c-8a68-f74d09060a74",
+      "width": 180000,
+      "layer": 0
+    }
+  },
+  "texts": {
+    "f65fd698-96c4-53d9-bf24-aa0333a80d33": {
+      "text": "$REFDES",
+      "placement": {
+        "shift": [
+          0,
+          12000000
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1800000,
+      "width": 0,
+      "layer": 0
+    },
+    "602f770a-8d06-57e1-8f44-e6f43911f083": {
+      "text": "control_source",
+      "placement": {
+        "shift": [
+          0,
+          0
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1500000,
+      "width": 0,
+      "layer": 0
+    }
+  }
+}

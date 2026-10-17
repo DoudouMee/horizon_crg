@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "b950e18f-bab1-5ee0-b8db-e892ed913a6f",
+  "name": "ICG",
+  "prefix": "U",
+  "gates": {
+    "ca365419-4f7e-5c86-87ed-fe0d34ce2c5b": {
+      "name": "A",
+      "suffix": "",
+      "unit": "4d1b7c69-4522-59ab-8150-166ce044ba18"
+    }
+  }
+}

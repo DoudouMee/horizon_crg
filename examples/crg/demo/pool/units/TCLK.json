@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "b85f6a36-ef0c-5957-b622-09d971c12106",
+  "name": "TCLK",
+  "manufacturer": "",
+  "pins": {
+    "ffaa05a6-7232-5f9e-b791-ad5994425ef8": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

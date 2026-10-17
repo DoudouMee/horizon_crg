@@ -106,5 +106,7 @@ private:
     const Block &get_block_for_group_tag_names() override;
 
     void handle_show_in_pool_manager(const ActionConnection &conn);
+    void edit_crg_component();
+    void show_crg_report();
 };
 } // namespace horizon

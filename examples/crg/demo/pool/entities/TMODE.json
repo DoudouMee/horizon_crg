@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "6063f41e-1ec9-57a7-8c8a-a6cacdde8193",
+  "name": "TMODE",
+  "prefix": "U",
+  "gates": {
+    "82c794e7-cc08-560e-82af-9ce4c8268dfa": {
+      "name": "A",
+      "suffix": "",
+      "unit": "0255268d-c81d-5fbf-9123-2507f3e604cc"
+    }
+  }
+}

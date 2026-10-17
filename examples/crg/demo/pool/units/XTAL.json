@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "7263ebc1-b2bd-5ed5-9791-27ba56745761",
+  "name": "XTAL",
+  "manufacturer": "",
+  "pins": {
+    "c018aa15-6979-5eb0-bcd3-c710c92cd1f1": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

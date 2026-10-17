@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "e45d8c75-3ab0-5b5e-a859-7a02a086f26a",
+  "name": "CFG",
+  "manufacturer": "",
+  "pins": {
+    "c9c54db9-6841-5514-8a32-29acb5d9554c": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

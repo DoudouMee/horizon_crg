@@ -1,0 +1,20 @@
+{
+  "type": "unit",
+  "uuid": "4266fcf7-e05a-5733-88a7-0f9ff8244219",
+  "name": "RSTSYNC",
+  "manufacturer": "",
+  "pins": {
+    "a332f423-0329-52a9-bbb1-30486e32bb93": {
+      "primary_name": "in",
+      "direction": "input"
+    },
+    "96041197-5ea7-59d3-b7c6-5a06609f6a73": {
+      "primary_name": "clk",
+      "direction": "input"
+    },
+    "f76f52ac-c67e-54ea-b602-4fdc37f27f3f": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

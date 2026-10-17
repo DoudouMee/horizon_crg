@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "142ac2f6-49fe-5fb8-9a4e-afe0fb1a8cf9",
+  "name": "CFG",
+  "prefix": "U",
+  "gates": {
+    "8f28ee84-8f29-59a6-bd56-14cabfb9be74": {
+      "name": "A",
+      "suffix": "",
+      "unit": "e45d8c75-3ab0-5b5e-a859-7a02a086f26a"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "1ad1c34c-5a46-59e8-8188-9f7771b0be6b",
+  "name": "CORE_RST",
+  "manufacturer": "",
+  "pins": {
+    "68d72b3a-c657-5550-9d82-db8cf909e8e3": {
+      "primary_name": "in",
+      "direction": "input"
+    }
+  }
+}

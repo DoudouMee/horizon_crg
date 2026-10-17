@@ -1,0 +1,12 @@
+{
+  "type": "unit",
+  "uuid": "2b596ae9-1061-5f2a-b897-558cfe6c4218",
+  "name": "SCAN",
+  "manufacturer": "",
+  "pins": {
+    "398fa332-1ae8-53ff-b2ea-3ae2c1f6855f": {
+      "primary_name": "out",
+      "direction": "output"
+    }
+  }
+}

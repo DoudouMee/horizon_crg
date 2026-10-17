@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "ba6c9815-8e2d-5ce4-9c4f-ac1a437cc8bc",
+  "name": "POR",
+  "prefix": "U",
+  "gates": {
+    "0dd3b1eb-3100-53a6-b66b-e942cb962deb": {
+      "name": "A",
+      "suffix": "",
+      "unit": "10cf1953-c40e-509c-9118-deaefeb31c75"
+    }
+  }
+}

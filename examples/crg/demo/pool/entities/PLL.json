@@ -1,0 +1,13 @@
+{
+  "type": "entity",
+  "uuid": "f3c7d25c-5676-52b3-946b-3799ac777ade",
+  "name": "PLL",
+  "prefix": "U",
+  "gates": {
+    "9d846d9a-b005-5a11-b98b-e1cee7e5c9c5": {
+      "name": "A",
+      "suffix": "",
+      "unit": "ba0a9b50-fffc-5dec-97f5-bff38da991c4"
+    }
+  }
+}

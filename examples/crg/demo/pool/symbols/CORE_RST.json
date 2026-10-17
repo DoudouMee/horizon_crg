@@ -1,0 +1,101 @@
+{
+  "type": "symbol",
+  "uuid": "a0f60723-299c-59ca-9eab-d922eb9f7494",
+  "unit": "1ad1c34c-5a46-59e8-8188-9f7771b0be6b",
+  "name": "CORE_RST",
+  "pins": {
+    "68d72b3a-c657-5550-9d82-db8cf909e8e3": {
+      "position": [
+        -10000000,
+        0
+      ],
+      "length": 2500000,
+      "orientation": "right",
+      "pad_visible": false
+    }
+  },
+  "junctions": {
+    "6418ed21-7027-5402-897c-5521cb06aeb8": {
+      "position": [
+        -7500000,
+        -10000000
+      ]
+    },
+    "c7053b0f-6ae7-5311-a506-c1a354ea71f7": {
+      "position": [
+        7500000,
+        -10000000
+      ]
+    },
+    "56657508-6123-5b7e-8407-22b44973ac94": {
+      "position": [
+        7500000,
+        10000000
+      ]
+    },
+    "de02171e-a35b-5b5a-8a9c-cc6a9ed49dfb": {
+      "position": [
+        -7500000,
+        10000000
+      ]
+    }
+  },
+  "lines": {
+    "614a2ea9-728d-58f9-b266-f1df927dcc40": {
+      "from": "6418ed21-7027-5402-897c-5521cb06aeb8",
+      "to": "c7053b0f-6ae7-5311-a506-c1a354ea71f7",
+      "width": 180000,
+      "layer": 0
+    },
+    "373ba86e-aad6-5f07-be2f-fb5c0dd05b79": {
+      "from": "c7053b0f-6ae7-5311-a506-c1a354ea71f7",
+      "to": "56657508-6123-5b7e-8407-22b44973ac94",
+      "width": 180000,
+      "layer": 0
+    },
+    "33910357-bf5c-5cc2-b975-68bc14d7d685": {
+      "from": "56657508-6123-5b7e-8407-22b44973ac94",
+      "to": "de02171e-a35b-5b5a-8a9c-cc6a9ed49dfb",
+      "width": 180000,
+      "layer": 0
+    },
+    "0fc2e319-1e8a-59ab-b9ae-4e1502affbeb": {
+      "from": "de02171e-a35b-5b5a-8a9c-cc6a9ed49dfb",
+      "to": "6418ed21-7027-5402-897c-5521cb06aeb8",
+      "width": 180000,
+      "layer": 0
+    }
+  },
+  "texts": {
+    "5bda9aef-4547-51a6-9be8-2ddc7163c459": {
+      "text": "$REFDES",
+      "placement": {
+        "shift": [
+          0,
+          12000000
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1800000,
+      "width": 0,
+      "layer": 0
+    },
+    "01f224d4-2398-5399-ac8f-7df0266425be": {
+      "text": "reset_output",
+      "placement": {
+        "shift": [
+          0,
+          0
+        ],
+        "angle": 0,
+        "mirror": false
+      },
+      "origin": "center",
+      "size": 1500000,
+      "width": 0,
+      "layer": 0
+    }
+  }
+}
