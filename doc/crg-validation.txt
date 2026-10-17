@@ -1,0 +1,33 @@
+Host: macOS arm64
+Python: 3.9.6
+Scope: native-format fixtures and CLI only; no Horizon binary/GUI build
+
+test_cli_refuses_overwriting_inputs (test_export_crg.ExportTests) ... CRG export failed: output would overwrite a project, metadata or pool input
+ok
+test_cli_writes_diagnostics_but_returns_nonzero (test_export_crg.ExportTests) ... ok
+test_dot_retains_fanout_without_inventing_driver (test_export_crg.ExportTests) ... ok
+test_duplicate_json_key_rejected (test_export_crg.ExportTests) ... ok
+test_explicit_nc_distinguished_from_absent_connection (test_export_crg.ExportTests) ... ok
+test_export_is_deterministic_and_read_only (test_export_crg.ExportTests) ... ok
+test_hard_link_to_input_is_not_overwritten (test_export_crg.ExportTests) ... CRG export failed: output would overwrite a project, metadata or pool input
+ok
+test_missing_pool_fails_instead_of_omitting_ports (test_export_crg.ExportTests) ... ok
+test_mixed_roles_and_widths (test_export_crg.ExportTests) ... ok
+test_multiple_drivers_and_no_driver (test_export_crg.ExportTests) ... ok
+test_native_uuid_connections_and_external_driver (test_export_crg.ExportTests) ... ok
+test_nonport_hierarchical_connection_fails (test_export_crg.ExportTests) ... ok
+test_output_cannot_overwrite_a_custom_project_pool (test_export_crg.ExportTests) ... CRG export failed: output would overwrite a project, metadata or pool input
+ok
+test_per_instance_override_uses_uuid_path (test_export_crg.ExportTests) ... ok
+test_pool_conflict_and_project_cache_priority (test_export_crg.ExportTests) ... ok
+test_recursive_hierarchy_is_fatal (test_export_crg.ExportTests) ... ok
+test_same_names_in_separate_instances_do_not_short (test_export_crg.ExportTests) ... ok
+test_stale_metadata_and_unsupported_schema (test_export_crg.ExportTests) ... ok
+test_two_instances_of_one_definition_preserve_identity (test_export_crg.ExportTests) ... ok
+test_unknown_net_is_fatal (test_export_crg.ExportTests) ... ok
+test_unknown_width_is_not_assumed_to_be_one (test_export_crg.ExportTests) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.089s
+
+OK
