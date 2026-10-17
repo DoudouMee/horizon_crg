@@ -22,17 +22,20 @@ Local, actually completed validation:
 
 **Not yet verified:** full GTK/native editor compilation, native load/expand/save/reopen executable, Linux GUI interaction and Windows/Linux packaging. The corresponding source and GitHub Actions jobs have been prepared, but have not run. The properties UI is an initial JSON-based editor. Dynamic switching/glitch checks, reset test bypass and UVM generation remain future work.
 
-## Current blocker
+## Platform validation in progress
 
-GitHub source reads work. A local clone was recovered through the available host execution path. The cloud-project listing endpoint failed; no concrete cloud-environment identity is known.
+The user confirmed upload and platform builds on 2026-10-18. Remote branch `crg/verification-foundation` was created at `6db57114b6bf4062f3b29f2122c5f3f093c564ab`. Master was unchanged. Another existing branch, `codex/crg-verification-foundation`, contains a different earlier Python exporter; it was inspected and left unchanged.
 
-Direct Git push could not authenticate. The GitHub connector's `create_tree` action was then rejected by automatic approval review because it uploads modified source to `DoudouMee/horizon_crg` without explicit authorization naming that destination. No connector-created tree, commit, branch or PR was created, and no Actions build was started. Do not retry any upload through an alternative path until the user explicitly authorizes it.
+Initial Linux Actions run: https://github.com/DoudouMee/horizon_crg/actions/runs/39068643168
 
-## Next authorized step after approval
+Initial Windows Actions run: https://github.com/DoudouMee/horizon_crg/actions/runs/39068643262
 
-1. With explicit authorization to upload to `DoudouMee/horizon_crg`, publish local changes onto `crg/verification-foundation`, retaining the baseline parent and leaving master unchanged.
-2. Run the prepared GitHub Actions Linux and Windows builds. Inspect compile, native round-trip and UI logs; fix actual failures.
-3. Download and visually inspect native-editor evidence. Exercise property changes, save/reopen and exports before calling the UI accepted.
-4. Supply downloadable platform builds with the example and launchers. Open a draft PR if appropriate; do not merge without instruction.
+The first Linux job stopped during dependency installation because Ubuntu 22.04 has no separate `cppzmq-dev` package. Removed that unnecessary package, matching the upstream Horizon dependency list. Windows was still installing dependencies at this checkpoint. No full native build has passed yet.
+
+## Remaining acceptance
+
+1. Inspect platform compile, native round-trip and UI logs; fix actual failures.
+2. Download and visually inspect native-editor evidence. Exercise property changes, save/reopen and exports before calling the UI accepted.
+3. Supply downloadable platform builds with the example and launchers. Open a draft PR if appropriate; do not merge without instruction.
 
 Detailed interfaces and current model limitations: [docs/crg.md](docs/crg.md).

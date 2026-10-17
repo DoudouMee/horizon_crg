@@ -14,7 +14,7 @@ jobs:
       - name: Install build and UI test dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y build-essential meson ninja-build cmake libsqlite3-dev util-linux librsvg2-dev libcairomm-1.0-dev libepoxy-dev libgtkmm-3.0-dev uuid-dev libzmq3-dev cppzmq-dev libglm-dev libgit2-dev libcurl4-gnutls-dev libocct-data-exchange-dev libocct-draw-dev occt-misc libpodofo-dev python3-dev libarchive-dev libspnav-dev xvfb xdotool imagemagick dbus-x11
+          sudo apt-get install -y build-essential meson ninja-build cmake libsqlite3-dev util-linux librsvg2-dev libcairomm-1.0-dev libepoxy-dev libgtkmm-3.0-dev uuid-dev libzmq3-dev libglm-dev libgit2-dev libcurl4-gnutls-dev libocct-data-exchange-dev libocct-draw-dev occt-misc libpodofo-dev python3-dev libarchive-dev libspnav-dev xvfb xdotool imagemagick dbus-x11
       - name: Build native editor and CRG tools
         run: |
           meson setup build --buildtype=debugoptimized
