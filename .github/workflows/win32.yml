@@ -1,105 +1,57 @@
 name: Build Windows binaries
-
 on:
   push:
-    branches:
-      - '**'
-      - '!appveyor-*'
-      - '!freebsd-*'
-      - '!pr-review*'
-    tags: [ '*' ]
-  pull_request:
-    branches: [ master ]
-
+    branches: ['**', '!appveyor-*', '!freebsd-*', '!pr-review*']
+    paths-ignore: ['.github/workflows/crg.yml', 'CRG_STATUS.md', 'docs/**', 'scripts/crg/gui_smoke.py']
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   build-win32:
     runs-on: windows-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
-    - name: Check tag
-      if: startsWith(github.ref, 'refs/tags/')
-      run: echo "Building tag ${{ github.ref }}"
-    - uses: actions/checkout@v3
-    - uses: msys2/setup-msys2@v2
-      with:
-        update: true
-        install: >-
-          mingw-w64-x86_64-gcc
-          mingw-w64-x86_64-pkgconf
-          mingw-w64-x86_64-gtkmm3
-          mingw-w64-x86_64-sqlite3
-          mingw-w64-x86_64-zeromq
-          mingw-w64-x86_64-cppzmq
-          mingw-w64-x86_64-glm
-          mingw-w64-x86_64-libgit2-winhttp
-          mingw-w64-x86_64-podofo
-          mingw-w64-x86_64-libarchive
-          mingw-w64-x86_64-curl-winssl
-          mingw-w64-x86_64-jq
-          mingw-w64-x86_64-meson
-          mingw-w64-x86_64-cmake
-          zip
-          unzip
-          make
-          git
-          dos2unix
-          rsync
-    - name: Install Opencascade lite
-      shell: msys2 {0}
-      run: |
-        wget https://github.com/carrotIndustries/mingw-opencascade-lite/releases/download/v7.8.1-1/mingw-w64-x86_64-opencascade-lite-7.8.1-1-any.pkg.tar.zst
-        pacman -U mingw-w64-x86_64-opencascade-lite-7.8.1-1-any.pkg.tar.zst --noconfirm
-    - name: Build
-      shell: msys2 {0}
-      run: |
-        meson setup build
-        meson compile -C build
-    - name: CRG acceptance tests
-      if: startsWith(github.ref, 'refs/heads/crg/')
-      shell: msys2 {0}
-      run: |
-        meson compile -C build horizon-crg-tests
-        ./build/horizon-crg-tests.exe examples/crg/demo/blocks.json examples/crg/demo/pool
-        mkdir -p acceptance
-        ./build/horizon-crg.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/demo
-        ./build/horizon-crg-native.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/roundtrip
-    - name: Make dist
-      shell: msys2 {0}
-      run: ./make_bindist.sh
-    - name: Add CRG examples and tools
-      if: startsWith(github.ref, 'refs/heads/crg/')
-      shell: msys2 {0}
-      run: |
-        cp build/horizon-crg.exe build/horizon-crg-native.exe dist/horizon/bin/
-        mkdir -p dist/horizon/examples
-        cp -a examples/crg/demo dist/horizon/examples/
-        cp docs/crg.md dist/horizon/README-CRG.md
-        cp scripts/crg/open-demo.bat dist/horizon/
-        cd dist
-        zip -r horizon-crg-windows.zip horizon
-    - name: Check for missing DLLs
-      shell: msys2 {0}
-      run: ./check_dll.sh
-    - name: set artifact name
-      shell: msys2 {0}
-      run: echo "artifact_name=horizon-win64-$(date +%Y-%m-%d-%H%M)-$(echo ${{ github.ref_name }} | tr / -)" >> $GITHUB_ENV
-    - name: deploy to selfnet mirror
-      if: github.repository_owner == 'horizon-eda' && github.event_name != 'pull_request'
-      shell: msys2 {0}
-      run: |
-        RSYNC_PASSWORD=${{ secrets.RSYNC_PASSWORD }} rsync -avz --stats dist/*.zip rsync://horizon-eda@mirror-1.server.selfnet.de/horizon-eda/win64-ci/${{ env.artifact_name }}.zip
-        echo "::notice title=Download this build::Get the zip archive from the selfnet mirror: https://mirror.selfnet.de/horizon-eda/win64-ci/${{ env.artifact_name }}.zip"
-    - uses: actions/upload-artifact@v4
-      with:
-        name: ${{ env.artifact_name }}
-        path: dist/*.zip
-    - name: Build MSI
-      if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/win32-installer'
-      run: |
-        $env:PATH += ";$($Env:WIX)\bin"
-        cd wix
-        .\install.bat
-    - uses: actions/upload-artifact@v4
-      if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/win32-installer'
-      with:
-        name: horizon-win64-installer
-        path: wix/*.msi
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-pkgconf
+            mingw-w64-ucrt-x86_64-gtkmm3
+            mingw-w64-ucrt-x86_64-sqlite3
+            mingw-w64-ucrt-x86_64-zeromq
+            mingw-w64-ucrt-x86_64-cppzmq
+            mingw-w64-ucrt-x86_64-glm
+            mingw-w64-ucrt-x86_64-libgit2
+            mingw-w64-ucrt-x86_64-podofo
+            mingw-w64-ucrt-x86_64-libarchive
+            mingw-w64-ucrt-x86_64-curl
+            mingw-w64-ucrt-x86_64-meson
+            mingw-w64-ucrt-x86_64-cmake
+            mingw-w64-ucrt-x86_64-opencascade
+            git
+      - name: Build native editor and tools
+        run: |
+          meson setup build --buildtype=debugoptimized
+          meson compile -C build -j 2 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
+      - name: CRG analysis and native round trip
+        run: |
+          mkdir -p acceptance
+          ./build/horizon-crg-tests.exe examples/crg/demo/blocks.json examples/crg/demo/pool
+          ./build/horizon-crg.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/demo
+          ./build/horizon-crg-native.exe examples/crg/demo/blocks.json examples/crg/demo/pool acceptance/roundtrip
+      - name: Package Windows runtime dependencies and validate isolated execution
+        run: python scripts/crg/package_windows.py "$(cygpath -m "$MINGW_PREFIX")"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: horizon-crg-windows-${{ github.sha }}
+          path: |
+            dist/*.zip
+            acceptance/
+            build/meson-logs/meson-log.txt
