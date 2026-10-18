@@ -92,9 +92,10 @@ try:
     if p.poll() is not None: raise RuntimeError('Native editor exited after closing the CRG report')
     xdo('windowfocus', window)
     xdo('key', 'Escape')
-    # XTAL's left symbol border in the fitted demo drawing.
-    xdo('mousemove', '--window', window, '340', '170')
+    # XTAL's placement origin in the fitted demo drawing.
+    xdo('mousemove', '--window', window, '377', '191')
     xdo('click', '1')
+    time.sleep(0.3)
     editing = subprocess.Popen(['gdbus', 'call', '--session', '--dest', bus.group(1), '--object-path', path.group(1),
                                '--method', 'org.gtk.Actions.Activate', 'crg_properties', '[]', '{}'], stdout=log, stderr=log)
     property_window = None
