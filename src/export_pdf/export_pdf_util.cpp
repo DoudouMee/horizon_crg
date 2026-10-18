@@ -1,3 +1,4 @@
+#include "podofo_compat.hpp"
 #include "canvas_pdf.hpp"
 #include "common/picture.hpp"
 #include "export_pdf_util.hpp"
@@ -13,8 +14,8 @@ void render_picture(PoDoFo::PdfDocument &doc, PoDoFo::PdfPainter &painter, const
 
     painter.Save();
     const auto fangle = pl.get_angle_rad();
-    painter.GraphicsState.SetCurrentMatrix(PoDoFo::Matrix::FromCoefficients(
-            cos(fangle), sin(fangle), -sin(fangle), cos(fangle), to_pt((double)pl.shift.x), to_pt((double)pl.shift.y)));
+    pdf_transform(painter, cos(fangle), sin(fangle), -sin(fangle), cos(fangle), to_pt((double)pl.shift.x),
+                  to_pt((double)pl.shift.y));
     const int64_t w = pic.data->width * pic.px_size;
     const int64_t h = pic.data->height * pic.px_size;
     const auto p = Coordd(w, h) / -2;

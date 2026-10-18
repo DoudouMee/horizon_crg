@@ -4,7 +4,7 @@ import sys
 
 build = sys.argv[1]
 listing = subprocess.check_output(['ninja', '-C', build, '-t', 'targets', 'all'], text=True)
-patterns = ('src_crg_', 'src_imp_imp_schematic_crg.cpp', 'src_block_component.cpp', 'src_imp_fab_output_window.cpp')
+patterns = ('src_crg_', 'src_imp_imp_schematic_crg.cpp', 'src_block_component.cpp', 'src_imp_fab_output_window.cpp', 'src_export_pdf_')
 targets = []
 for line in listing.splitlines():
     target, sep, rule = line.partition(': ')

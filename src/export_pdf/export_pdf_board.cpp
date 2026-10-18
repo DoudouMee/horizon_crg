@@ -1,3 +1,4 @@
+#include "podofo_compat.hpp"
 #include "export_pdf.hpp"
 #include "canvas_pdf.hpp"
 #include "util/podofo_inc.hpp"
@@ -48,16 +49,14 @@ void export_pdf(const class Board &brd, const class PDFExportSettings &settings,
     auto &page = document.GetPages().CreatePage(PoDoFo::Rect(0, 0, to_pt(width), to_pt(height)));
     painter.SetCanvas(page);
     painter.GraphicsState.SetLineCapStyle(PoDoFo::PdfLineCapStyle::Round);
-    painter.GraphicsState.SetFillColor(PoDoFo::PdfColor(0, 0, 0));
+    pdf_set_fill_color(painter, PoDoFo::PdfColor(0, 0, 0));
     painter.TextState.SetFont(font, 10);
     painter.TextState.SetRenderingMode(PoDoFo::PdfTextRenderingMode::Invisible);
     if (settings.mirror) {
-        painter.GraphicsState.SetCurrentMatrix(PoDoFo::Matrix::FromCoefficients(
-                -1, 0, 0, 1, to_pt(bbox.second.x + border_width), to_pt(-bbox.first.y + border_width)));
+        pdf_transform(painter, -1, 0, 0, 1, to_pt(bbox.second.x + border_width), to_pt(-bbox.first.y + border_width));
     }
     else {
-        painter.GraphicsState.SetCurrentMatrix(PoDoFo::Matrix::FromCoefficients(
-                1, 0, 0, 1, to_pt(-bbox.first.x + border_width), to_pt(-bbox.first.y + border_width)));
+        pdf_transform(painter, 1, 0, 0, 1, to_pt(-bbox.first.x + border_width), to_pt(-bbox.first.y + border_width));
     }
     ca.layer_filter = true;
     ca.use_layer_colors = true;

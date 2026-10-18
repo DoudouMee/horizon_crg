@@ -69,6 +69,7 @@ try:
     export = acceptance/'gui-export.json'
     xdo('windowfocus', chooser_window)
     xdo('key', 'ctrl+l')
+    xdo('key', 'ctrl+a')
     xdo('type', '--clearmodifiers', str(export))
     xdo('key', 'Return')
     for _ in range(40):
