@@ -24,9 +24,11 @@ try:
     if not window: raise RuntimeError('No visible native editor window')
     xdo('windowsize', window, '1560', '940')
     time.sleep(3)
-    subprocess.run(['import', '-window', 'root', str(acceptance/'native-editor.png')], check=True)
-    # GTK F10 opens the main menu; Home then text search selects the CRG analysis item.
     xdo('windowfocus', window)
+    xdo('key', 'Home')
+    time.sleep(0.5)
+    subprocess.run(['import', '-window', 'root', str(acceptance/'native-editor.png')], check=True)
+    # GTK F10 opens the main menu. The action below opens the report itself.
     xdo('key', 'F10')
     time.sleep(0.5)
     subprocess.run(['import', '-window', 'root', str(acceptance/'native-menu.png')], check=True)
@@ -48,6 +50,11 @@ try:
     if not report_window: raise RuntimeError('CRG verification report did not open through the native window action')
     subprocess.run(['import', '-window', 'root', str(acceptance/'native-report.png')], check=True)
     xdo('windowfocus', report_window)
+    # The native notebook's second tab is visible at this location in the report.
+    xdo('mousemove', '--window', report_window, '205', '64')
+    xdo('click', '1')
+    time.sleep(0.5)
+    subprocess.run(['import', '-window', 'root', str(acceptance/'native-scenarios.png')], check=True)
     xdo('key', 'Escape')
     invocation.wait(timeout=5)
     if p.poll() is not None: raise RuntimeError('Native editor exited after closing the CRG report')
