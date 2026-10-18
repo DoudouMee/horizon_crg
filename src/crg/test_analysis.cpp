@@ -125,6 +125,9 @@ int main(int argc, char **argv)
         s = original;
         comp(s, "MUX")["crg"]["parameters"]["select_map"]["0"] = "invented_input";
         check(diagnostic(analyze(s), "invalid_metadata"), "Unmodeled MUX branch must not yield an expectation");
+        s = original;
+        comp(s, "ICG")["crg"]["ports"].erase("test_en");
+        check(diagnostic(analyze(s), "invalid_metadata"), "An unmapped physical test-enable input cannot be ignored");
         // Reuse a definition twice. Each output port aliases a different parent net.
         json leaf = {
                 {"uuid", "leaf"},

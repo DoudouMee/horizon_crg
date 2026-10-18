@@ -145,7 +145,7 @@ void ImpSchematic::show_crg_report()
                     dot.exceptions(std::ios::failbit | std::ios::badbit);
                     dot << crg::to_dot(report);
                     dot.close();
-                    auto csv = make_ofstream(prefix + ".csv");
+                    auto csv = make_ofstream(prefix + ".csv", std::ios::out | std::ios::binary);
                     csv.exceptions(std::ios::failbit | std::ios::badbit);
                     csv << crg::scenarios_csv(report);
                     csv.close();

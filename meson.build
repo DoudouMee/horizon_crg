@@ -1055,7 +1055,7 @@ crg_tests = executable('horizon-crg-tests', 'src/crg/test_analysis.cpp', 'src/cr
 test('crg-analysis', crg_tests, args: [meson.current_source_dir() / 'examples/crg/demo/blocks.json',
                                    meson.current_source_dir() / 'examples/crg/demo/pool'])
 
-horizon_crg_native = executable('horizon-crg-native', ['src/crg/native_main.cpp', src_pool_update, resources],
+horizon_crg_native = executable('horizon-crg-native', ['src/crg/native_main.cpp', 'src/util/text_renderer.cpp', src_pool_update, resources],
     dependencies: build_dependencies_pool_prj_mgr,
     link_with: [clipper_nopic, libhorizon], include_directories: include_directories,
     cpp_args: cpp_args, install: true)

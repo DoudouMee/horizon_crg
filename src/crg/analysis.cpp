@@ -502,8 +502,16 @@ void validate_metadata(const json &metadata, const json &pins)
         expected["in1"] = "input:" + std::string(kind == "logic" ? "control" : "reset");
     if (kind == "divider" && p.contains("divide_map"))
         expected["cfg"] = "input:control";
-    if (roles.contains("test_en"))
+    if (kind == "gate" && roles.contains("test_en"))
         expected["test_en"] = "input:control";
+    if (kind != "custom") {
+        for (const auto &[role, unused] : roles.items())
+            if (!expected.contains(role))
+                throw std::runtime_error("Unsupported role for this primitive: " + role);
+        for (const auto &[pin, unused] : pins.items())
+            if (!mapped.count(pin))
+                throw std::runtime_error("Native pin lacks a semantic role: " + pin);
+    }
     auto positive = [&](const char *key, bool integer) {
         if (!p.contains(key) || !p.at(key).is_number() || (integer && !p.at(key).is_number_integer())
             || !std::isfinite(p.at(key).get<double>()) || p.at(key).get<double>() <= 0)
