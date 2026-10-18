@@ -2,6 +2,7 @@ name: CRG Linux build and acceptance
 on:
   push:
     branches: ['crg/**']
+    paths-ignore: ['.github/workflows/win32.yml', 'scripts/crg/package_windows.py', 'scripts/crg/open-demo.bat', 'CRG_STATUS.md', 'docs/**']
   workflow_dispatch:
 permissions:
   contents: read
@@ -48,13 +49,18 @@ jobs:
           cp docs/crg.md dist/horizon-crg-linux/README.md
           cp LICENSE dist/horizon-crg-linux/LICENSE
           cp scripts/crg/open-demo.sh dist/horizon-crg-linux/
+          strip --strip-unneeded dist/horizon-crg-linux/bin/*
+          ./dist/horizon-crg-linux/bin/horizon-crg-native dist/horizon-crg-linux/examples/demo/blocks.json dist/horizon-crg-linux/examples/demo/pool acceptance/packaged-roundtrip
           tar -czf dist/horizon-crg-linux-ubuntu22.04.tar.gz -C dist horizon-crg-linux
+      - uses: actions/upload-artifact@v4
+        with:
+          name: horizon-crg-linux-${{ github.sha }}
+          path: dist/*.tar.gz
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: crg-linux-${{ github.sha }}
+          name: crg-linux-acceptance-${{ github.sha }}
           path: |
-            dist/*.tar.gz
             acceptance/
             build/meson-logs/meson-log.txt
             build/meson-logs/testlog.txt
