@@ -89,6 +89,25 @@ try:
     xdo('key', 'Escape')
     invocation.wait(timeout=5)
     if p.poll() is not None: raise RuntimeError('Native editor exited after closing the CRG report')
+    xdo('windowfocus', window)
+    xdo('key', 'Escape')
+    # XTAL's left symbol border in the fitted demo drawing.
+    xdo('mousemove', '--window', window, '340', '170')
+    xdo('click', '1')
+    editing = subprocess.Popen(['gdbus', 'call', '--session', '--dest', bus.group(1), '--object-path', path.group(1),
+                               '--method', 'org.gtk.Actions.Activate', 'crg_properties', '[]', '{}'], stdout=log, stderr=log)
+    property_window = None
+    for _ in range(40):
+        try:
+            candidates = xdo('search', '--onlyvisible', '--name', '^CRG component: XTAL$').splitlines()
+            if candidates: property_window = candidates[-1]; break
+        except subprocess.CalledProcessError: pass
+        time.sleep(0.2)
+    if not property_window: raise RuntimeError('Selected XTAL did not open native CRG properties')
+    subprocess.run(['import', '-window', 'root', str(acceptance/'native-properties.png')], check=True)
+    xdo('windowfocus', property_window)
+    xdo('key', 'Escape')
+    editing.wait(timeout=5)
     (acceptance/'gui-smoke.txt').write_text('PASS: native editor displayed the example, opened the CRG report, and exported matching JSON/DOT/CSV through the file chooser.\nProperty editing remains manual acceptance.\n')
 except Exception:
     subprocess.run(['import', '-window', 'root', str(acceptance/'gui-failure.png')], check=False)
