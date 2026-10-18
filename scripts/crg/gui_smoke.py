@@ -2,6 +2,7 @@
 import os
 import json
 import re
+import shutil
 import subprocess
 import time
 from pathlib import Path
@@ -9,10 +10,12 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[2]
 acceptance = root / 'acceptance'
 acceptance.mkdir(exist_ok=True)
-env = dict(os.environ, HORIZON_POOL=str(root/'examples/crg/demo/pool'))
+project = acceptance/'ui-project'
+shutil.copytree(root/'examples/crg/demo', project, dirs_exist_ok=True)
+env = dict(os.environ, HORIZON_POOL=str(project/'pool'))
 subprocess.run([str(root/'build/horizon-crg-native'), '--prepare-pool', env['HORIZON_POOL']], env=env, check=True)
 log = (acceptance/'gui.log').open('w')
-p = subprocess.Popen([str(root/'build/horizon-imp'), '-c', str(root/'examples/crg/demo/blocks.json'), str(root/'examples/crg/demo/pictures')], env=env, stdout=log, stderr=subprocess.STDOUT)
+p = subprocess.Popen([str(root/'build/horizon-imp'), '-c', str(project/'blocks.json'), str(project/'pictures')], env=env, stdout=log, stderr=subprocess.STDOUT)
 def xdo(*args): return subprocess.check_output(['xdotool', *args], text=True).strip()
 try:
     window = None
@@ -108,9 +111,35 @@ try:
     if not property_window: raise RuntimeError('Selected XTAL did not open native CRG properties')
     subprocess.run(['import', '-window', 'root', str(acceptance/'native-properties.png')], check=True)
     xdo('windowfocus', property_window)
-    xdo('key', 'Escape')
+    xdo('mousemove', '--window', property_window, '220', '100')
+    xdo('click', '1')
+    xdo('mousemove', '--window', property_window, '100', '180')
+    xdo('click', '1')
+    xdo('key', 'ctrl+a')
+    xdo('type', '--clearmodifiers', '{"frequency_hz":12000000}')
+    subprocess.run(['import', '-window', 'root', str(acceptance/'native-property-edit.png')], check=True)
+    xdo('mousemove', '--window', property_window, '775', '560')
+    xdo('click', '1')
     editing.wait(timeout=5)
-    (acceptance/'gui-smoke.txt').write_text('PASS: native editor displayed the example, opened the CRG report, and exported matching JSON/DOT/CSV through the file chooser.\nProperty editing remains manual acceptance.\n')
+    xdo('windowfocus', window)
+    xdo('key', 'ctrl+s')
+    for _ in range(40):
+        block = json.loads((project/'top_block.json').read_text())
+        xtal = next(c for c in block['components'].values() if c['refdes'] == 'XTAL')
+        if xtal['crg']['parameters']['frequency_hz'] == 12000000: break
+        time.sleep(0.2)
+    else: raise RuntimeError('Edited XTAL frequency was not saved by the native editor')
+    reopened = acceptance/'ui-edited-roundtrip'
+    subprocess.run([str(root/'build/horizon-crg-native'), str(project/'blocks.json'), env['HORIZON_POOL'], str(reopened)], env=env, check=True)
+    changed = json.loads((reopened/'verification.json').read_text())
+    original = {case['id']: case for case in expected['scenarios']}
+    for case in changed['scenarios']:
+        before = next(o for o in original[case['id']]['observations'] if o['name'] == 'Top/CORE_CLK')
+        after = next(o for o in case['observations'] if o['name'] == 'Top/CORE_CLK')
+        factor = 0.5 if case['mode'] == 'functional' else 1
+        if after['frequency_hz'] != before['frequency_hz'] * factor:
+            raise RuntimeError('Saved native property edit did not produce the expected clock frequency')
+    (acceptance/'gui-smoke.txt').write_text('PASS: native editor displayed the example, exported matching JSON/DOT/CSV, edited XTAL from 24 to 12 MHz, saved the project, and preserved the edit through native reopen with matching functional/DFT expectations.\n')
 except Exception:
     subprocess.run(['import', '-window', 'root', str(acceptance/'gui-failure.png')], check=False)
     raise
