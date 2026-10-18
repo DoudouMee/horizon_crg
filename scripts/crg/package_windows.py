@@ -27,7 +27,7 @@ for name in ('gdk-pixbuf-2.0', 'engines-3', 'ossl-modules'):
         target = dest / 'lib' / name
         shutil.copytree(source, target, dirs_exist_ok=True)
         queue.extend(target.rglob('*.dll'))
-        for extension in ('*.a', '*.la'): 
+        for extension in ('*.a', '*.la'):
             for archive in target.rglob(extension): archive.unlink()
 for name in ('icons/Adwaita', 'icons/hicolor', 'glib-2.0/schemas', 'licenses'):
     source = prefix / 'share' / name

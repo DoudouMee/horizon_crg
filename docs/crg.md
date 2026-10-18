@@ -45,7 +45,7 @@ Produces `verification.json`, `.dot`, `.csv`. Exit 0: structural checks passed; 
 ## Semantics and limitations
 
 - Roles refer to exact native `gate_uuid/pin_uuid` values shown in Available native pins.
-- `control_source`/`reset_source.parameters`: explicit integer `values`, globally unique `key`, and a `binding` identifying a register field or testbench signal. Bindings are descriptive, not executable bus transactions.
+- `control_source`/`reset_source.parameters`: explicit nonnegative integer `values` fitting the output pin width (up to signed 32-bit range), globally unique `key`, and a `binding` identifying a register field or testbench signal. Bindings are descriptive, not executable bus transactions.
 - `clock_source.parameters.frequency_hz`; `pll.parameters.multiply/divide` and an explicitly connected `lock` control. Unlocked PLL output is unspecified.
 - `mux.parameters.select_map`: encoded select → input role. `switch_protocol` describes the required setup; the tool does not prove that protocol or infer glitch-free switching.
 - `divider.parameters.divisor`, or `divide_map` with a `cfg` input. Zero/non-integer divisors are errors.

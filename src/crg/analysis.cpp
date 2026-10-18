@@ -530,7 +530,7 @@ void validate_metadata(const json &metadata, const json &pins)
         if (!p.contains("select_map") || !p.at("select_map").is_object() || p.at("select_map").empty())
             throw std::runtime_error("MUX select_map is required");
         for (const auto &[key, value] : p.at("select_map").items())
-            if (!value.is_string() || !roles.contains(value.get<std::string>()) || value == "sel" || value == "out")
+            if (!value.is_string() || !roles.contains(value.get<std::string>()) || (value != "in0" && value != "in1"))
                 throw std::runtime_error("MUX mapping must reference a clock input role");
     }
     if (kind == "logic" || kind == "reset_combine") {
@@ -556,6 +556,23 @@ void validate_metadata(const json &metadata, const json &pins)
         auto spec = type.get<std::string>();
         if (pin.at("direction") != spec.substr(0, spec.find(':')))
             throw std::runtime_error("Wrong pin direction for " + role);
+        const auto semantic_type = spec.substr(spec.find(':') + 1);
+        if (pin.value("signal_type", "unknown") != "unknown" && pin.at("signal_type") != semantic_type)
+            throw std::runtime_error("Pin signal_type contradicts semantic role " + role);
+    }
+    if (kind == "control_source" || kind == "reset_source") {
+        const auto &values = p.at("values");
+        const auto width = pins.at(roles.at("out").get<std::string>()).value("width", 1);
+        if (!values.is_array() || values.empty())
+            throw std::runtime_error("Source values must be a nonempty array");
+        std::set<int> unique;
+        for (const auto &value : values) {
+            if (!value.is_number_integer() || value.get<double>() < 0 || value.get<double>() > 2147483647.0
+                || (width < 31 && value.get<double>() >= std::ldexp(1.0, width)))
+                throw std::runtime_error("Source value exceeds pin width or supported integer range");
+            if (!unique.insert(value.get<int>()).second)
+                throw std::runtime_error("Duplicate source domain value");
+        }
     }
 }
 

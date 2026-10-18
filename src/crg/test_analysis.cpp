@@ -119,6 +119,12 @@ int main(int argc, char **argv)
         auto &r = comp(s, "RSTSYNC");
         r["crg"]["parameters"].erase("input_active_level");
         check(diagnostic(analyze(s), "invalid_metadata"), "Missing reset polarity must be rejected");
+        s = original;
+        comp(s, "POR")["crg"]["parameters"]["values"] = {2};
+        check(diagnostic(analyze(s), "invalid_metadata"), "Reset stimulus must fit its native pin width");
+        s = original;
+        comp(s, "MUX")["crg"]["parameters"]["select_map"]["0"] = "invented_input";
+        check(diagnostic(analyze(s), "invalid_metadata"), "Unmodeled MUX branch must not yield an expectation");
         // Reuse a definition twice. Each output port aliases a different parent net.
         json leaf = {
                 {"uuid", "leaf"},
@@ -152,7 +158,7 @@ int main(int argc, char **argv)
               "Stable instance identities required");
         check(to_dot(report).find("digraph CRG") == 0 && scenarios_csv(report).find("case_id,mode") == 0,
               "Export formats missing");
-        std::cout << "CRG analysis: 24 scenarios and 15 fault/coverage/hierarchy regressions passed\n";
+        std::cout << "CRG analysis: 24 scenarios and fault/coverage/hierarchy regressions passed\n";
         return 0;
     }
     catch (const std::exception &e) {

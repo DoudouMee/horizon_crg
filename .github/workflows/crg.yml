@@ -5,6 +5,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  CCACHE_DIR: ${{ github.workspace }}/.ccache
+  CXX: ccache g++
+  CC: ccache gcc
 jobs:
   linux:
     runs-on: ubuntu-22.04
@@ -14,12 +18,18 @@ jobs:
       - name: Install build and UI test dependencies
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y build-essential meson ninja-build cmake libsqlite3-dev util-linux librsvg2-dev libcairomm-1.0-dev libepoxy-dev libgtkmm-3.0-dev uuid-dev libzmq3-dev libglm-dev libgit2-dev libcurl4-gnutls-dev libocct-data-exchange-dev libocct-draw-dev occt-misc libpodofo-dev python3-dev libarchive-dev libspnav-dev xvfb xdotool imagemagick dbus-x11
+          sudo apt-get install -y build-essential ccache meson ninja-build cmake libsqlite3-dev util-linux librsvg2-dev libcairomm-1.0-dev libepoxy-dev libgtkmm-3.0-dev uuid-dev libzmq3-dev libglm-dev libgit2-dev libcurl4-gnutls-dev libocct-data-exchange-dev libocct-draw-dev occt-misc libpodofo-dev python3-dev libarchive-dev libspnav-dev xvfb xdotool imagemagick dbus-x11 x11-utils
+      - uses: actions/cache/restore@v4
+        with:
+          path: .ccache
+          key: crg-crg-ccache-v1-${{ github.sha }}
+          restore-keys: crg-crg-ccache-v1-
       - name: Build native editor and CRG tools
         run: |
+          ccache --max-size=1G
           meson setup build --buildtype=debugoptimized
           python3 scripts/crg/compile_probe.py build
-          meson compile -C build -j 2 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
+          meson compile -C build -j 4 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
       - name: Analyze and verify native load, expand, save and reopen
         run: |
           mkdir -p acceptance
@@ -36,6 +46,7 @@ jobs:
           cp build/horizon-{eda,imp,crg,crg-native} dist/horizon-crg-linux/bin/
           cp -a examples/crg/demo dist/horizon-crg-linux/examples/
           cp docs/crg.md dist/horizon-crg-linux/README.md
+          cp LICENSE dist/horizon-crg-linux/LICENSE
           cp scripts/crg/open-demo.sh dist/horizon-crg-linux/
           tar -czf dist/horizon-crg-linux-ubuntu22.04.tar.gz -C dist horizon-crg-linux
       - uses: actions/upload-artifact@v4
@@ -47,3 +58,8 @@ jobs:
             acceptance/
             build/meson-logs/meson-log.txt
             build/meson-logs/testlog.txt
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .ccache
+          key: crg-crg-ccache-v1-${{ github.sha }}

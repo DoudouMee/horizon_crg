@@ -1,5 +1,6 @@
 """Launch the actual native editor under Xvfb, open its CRG menu and capture evidence."""
 import os
+import re
 import subprocess
 import time
 from pathlib import Path
@@ -30,7 +31,27 @@ try:
     time.sleep(0.5)
     subprocess.run(['import', '-window', 'root', str(acceptance/'native-menu.png')], check=True)
     if p.poll() is not None: raise RuntimeError('Native editor crashed while opening menu')
-    (acceptance/'gui-smoke.txt').write_text('PASS: native schematic editor started, stayed alive and displayed the example.\nMenu/report/property interaction remains manual acceptance unless explicitly exercised.\n')
+    xdo('key', 'Escape')
+    properties = subprocess.check_output(['xprop', '-id', window, '_GTK_UNIQUE_BUS_NAME', '_GTK_WINDOW_OBJECT_PATH'], text=True)
+    bus = re.search(r'_GTK_UNIQUE_BUS_NAME[^=]*= "([^"]+)"', properties)
+    path = re.search(r'_GTK_WINDOW_OBJECT_PATH[^=]*= "([^"]+)"', properties)
+    if not bus or not path: raise RuntimeError('Native GTK action endpoint is unavailable')
+    invocation = subprocess.Popen(['gdbus', 'call', '--session', '--dest', bus.group(1), '--object-path', path.group(1),
+                                  '--method', 'org.gtk.Actions.Activate', 'crg_analysis', '[]', '{}'], stdout=log, stderr=log)
+    report_window = None
+    for _ in range(40):
+        try:
+            candidates = xdo('search', '--onlyvisible', '--name', '^CRG verification analysis$').splitlines()
+            if candidates: report_window = candidates[-1]; break
+        except subprocess.CalledProcessError: pass
+        time.sleep(0.2)
+    if not report_window: raise RuntimeError('CRG verification report did not open through the native window action')
+    subprocess.run(['import', '-window', 'root', str(acceptance/'native-report.png')], check=True)
+    xdo('windowfocus', report_window)
+    xdo('key', 'Escape')
+    invocation.wait(timeout=5)
+    if p.poll() is not None: raise RuntimeError('Native editor exited after closing the CRG report')
+    (acceptance/'gui-smoke.txt').write_text('PASS: native schematic editor displayed the example and opened/closed the CRG report.\nProperty editing and file export interactions remain manual acceptance.\n')
 finally:
     p.terminate()
     try: p.wait(timeout=8)

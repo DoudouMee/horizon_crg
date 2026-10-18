@@ -6,6 +6,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  CCACHE_DIR: ${{ github.workspace }}/.ccache
+  CXX: ccache g++
+  CC: ccache gcc
 jobs:
   build-win32:
     runs-on: windows-latest
@@ -20,6 +24,7 @@ jobs:
           msystem: UCRT64
           update: true
           install: >-
+            mingw-w64-ucrt-x86_64-ccache
             mingw-w64-ucrt-x86_64-gcc
             mingw-w64-ucrt-x86_64-pkgconf
             mingw-w64-ucrt-x86_64-gtkmm3
@@ -35,11 +40,17 @@ jobs:
             mingw-w64-ucrt-x86_64-cmake
             mingw-w64-ucrt-x86_64-opencascade
             git
+      - uses: actions/cache/restore@v4
+        with:
+          path: .ccache
+          key: crg-win32-ccache-v1-${{ github.sha }}
+          restore-keys: crg-win32-ccache-v1-
       - name: Build native editor and tools
         run: |
+          ccache --max-size=1G
           meson setup build --buildtype=debugoptimized
           python scripts/crg/compile_probe.py build
-          meson compile -C build -j 2 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
+          meson compile -C build -j 4 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
       - name: CRG analysis and native round trip
         run: |
           mkdir -p acceptance
@@ -56,3 +67,8 @@ jobs:
             dist/*.zip
             acceptance/
             build/meson-logs/meson-log.txt
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .ccache
+          key: crg-win32-ccache-v1-${{ github.sha }}

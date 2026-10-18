@@ -55,3 +55,5 @@ examples/crg/demo/pool/*.db
 examples/crg/demo/pool/*.db-*
 acceptance/
 validation/
+
+.ccache/
