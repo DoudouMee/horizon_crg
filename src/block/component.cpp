@@ -105,7 +105,7 @@ Component::Component(const UUID &uu, const json &j, IPool &pool, Block *block)
     : uuid(uu), entity(pool.get_entity(j.at("entity").get<std::string>())), refdes(j.at("refdes").get<std::string>()),
       value(j.at("value").get<std::string>()), nopopulate(j.value("nopopulate", false))
 {
-    crg = j.value("crg", json::object());
+    crg_metadata = j.value("crg", json::object()).dump();
     if (j.count("part")) {
         part = pool.get_part(j.at("part").get<std::string>());
         if (part->entity->uuid != entity->uuid)
@@ -260,8 +260,8 @@ json Component::serialize() const
     json j;
     j["refdes"] = refdes;
     j["value"] = value;
-    if (!crg.empty())
-        j["crg"] = crg;
+    if (crg_metadata != "{}")
+        j["crg"] = json::parse(crg_metadata);
     j["entity"] = (std::string)entity->uuid;
     j["group"] = (std::string)group;
     j["tag"] = (std::string)tag;

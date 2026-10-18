@@ -1,6 +1,6 @@
 #pragma once
 #include "common/common.hpp"
-#include "nlohmann/json.hpp"
+#include "nlohmann/json_fwd.hpp"
 #include "net.hpp"
 #include "util/uuid.hpp"
 #include "util/uuid_path.hpp"
@@ -50,7 +50,8 @@ public:
     std::string refdes;
     std::string value;
     // CRG semantics travel with the native component through save, undo and copy/paste.
-    json crg = json::object();
+    // Keep JSON definitions out of this widely included header. Value semantics preserve undo history.
+    std::string crg_metadata = "{}";
     UUID group;
     UUID tag;
     bool nopopulate = false;

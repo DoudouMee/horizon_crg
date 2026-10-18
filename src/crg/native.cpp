@@ -15,7 +15,7 @@ json pins_from_component(const Component &component)
                      Pin::direction_lut.lookup_reverse(component.get_effective_direction(UUIDPath<2>(gid, pid)))},
                     {"width", 1},
                     {"signal_type", "unknown"}};
-    crg::decorate_pins(component.crg, pins);
+    crg::decorate_pins(json::parse(component.crg_metadata), pins);
     return pins;
 }
 

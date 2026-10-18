@@ -56,12 +56,12 @@ void ImpSchematic::edit_crg_component()
     auto kind = Gtk::manage(new Gtk::ComboBoxText);
     for (const auto &[name, unused] : crg::kind_catalog().items())
         kind->append(name, name);
-    kind->set_active_id(comp.crg.value("kind", "custom"));
+    auto metadata = json::parse(comp.crg_metadata);
+    kind->set_active_id(metadata.value("kind", "custom"));
     box->pack_start(*kind, false, false);
     auto book = Gtk::manage(new Gtk::Notebook);
-    auto metadata = comp.crg.empty()
-                            ? json{{"kind", "custom"}, {"ports", json::object()}, {"parameters", json::object()}}
-                            : comp.crg;
+    if (metadata.empty())
+        metadata = json{{"kind", "custom"}, {"ports", json::object()}, {"parameters", json::object()}};
     auto roles = add_text_page(*book, "Port roles (JSON)", metadata.value("ports", json::object()).dump(2), true);
     auto parameters =
             add_text_page(*book, "Parameters (JSON)", metadata.value("parameters", json::object()).dump(2), true);
@@ -75,7 +75,7 @@ void ImpSchematic::edit_crg_component()
             metadata["ports"] = json::parse(roles->get_buffer()->get_text().raw());
             metadata["parameters"] = json::parse(parameters->get_buffer()->get_text().raw());
             crg::validate_metadata(metadata, crg::pins_from_component(comp));
-            comp.crg = metadata;
+            comp.crg_metadata = metadata.dump();
             core_schematic.rebuild("edit CRG component properties");
             core_schematic.set_needs_save();
             break;

@@ -38,6 +38,7 @@ jobs:
       - name: Build native editor and tools
         run: |
           meson setup build --buildtype=debugoptimized
+          python scripts/crg/compile_probe.py build
           meson compile -C build -j 2 horizon-eda horizon-imp horizon-crg horizon-crg-native horizon-crg-tests
       - name: CRG analysis and native round trip
         run: |
