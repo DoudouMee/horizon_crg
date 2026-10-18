@@ -10,6 +10,7 @@ root = Path(__file__).resolve().parents[2]
 acceptance = root / 'acceptance'
 acceptance.mkdir(exist_ok=True)
 env = dict(os.environ, HORIZON_POOL=str(root/'examples/crg/demo/pool'))
+subprocess.run([str(root/'build/horizon-crg-native'), '--prepare-pool', env['HORIZON_POOL']], env=env, check=True)
 log = (acceptance/'gui.log').open('w')
 p = subprocess.Popen([str(root/'build/horizon-imp'), '-c', str(root/'examples/crg/demo/blocks.json'), str(root/'examples/crg/demo/pictures')], env=env, stdout=log, stderr=subprocess.STDOUT)
 def xdo(*args): return subprocess.check_output(['xdotool', *args], text=True).strip()

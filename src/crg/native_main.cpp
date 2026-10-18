@@ -13,8 +13,10 @@
 int main(int argc, char **argv)
 {
     try {
-        if (argc != 4) {
+        const bool prepare_only = argc == 3 && std::string(argv[1]) == "--prepare-pool";
+        if (argc != 4 && !prepare_only) {
             std::cerr << "Usage: horizon-crg-native BLOCKS_JSON POOL_DIRECTORY OUTPUT_DIRECTORY\n"
+                         "       horizon-crg-native --prepare-pool POOL_DIRECTORY\n"
                          "Indexes the native pool, verifies a native load/expand/save/reopen round trip, and exports a "
                          "report.\n";
             return 2;
@@ -35,6 +37,12 @@ int main(int argc, char **argv)
                 std::cerr << filename << ": " << message << '\n';
             }
         });
+        if (prepare_only) {
+            if (load_error)
+                throw std::runtime_error("Native pool preparation reported errors");
+            std::cout << "Native pool preparation passed\n";
+            return 0;
+        }
         horizon::Pool pool(argv[2]);
         auto blocks = horizon::BlocksSchematic::new_from_file(argv[1], pool);
         if (load_error)

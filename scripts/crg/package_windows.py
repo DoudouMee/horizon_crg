@@ -17,6 +17,7 @@ queue = deque()
 for name in ('horizon-eda', 'horizon-imp', 'horizon-crg', 'horizon-crg-native'):
     src = root / 'build' / (name + '.exe')
     shutil.copy2(src, bindir / src.name)
+    subprocess.run(['strip', '--strip-unneeded', str(bindir / src.name)], check=True)
     queue.append(bindir / src.name)
 for name in ('gspawn-win64-helper.exe', 'gspawn-win64-helper-console.exe'):
     src = prefix / 'bin' / name
@@ -69,6 +70,7 @@ acceptance.mkdir(exist_ok=True)
 (acceptance/'runtime-dependencies.json').write_text(json.dumps(sorted(bundled), indent=2), encoding='utf-8')
 # Exclude MSYS2/UCRT from PATH, so tool success also tests the shipped runtime closure.
 env = dict(os.environ, PATH=str(bindir)+os.pathsep+str(system), HORIZON_POOL=str(dest/'examples/demo/pool'))
+subprocess.run([str(bindir/'horizon-crg-native.exe'), '--prepare-pool', str(dest/'examples/demo/pool')], env=env, cwd=dest, check=True)
 subprocess.run([str(bindir/'horizon-crg.exe'), str(dest/'examples/demo/blocks.json'), str(dest/'examples/demo/pool'), str(acceptance/'packaged-demo')], env=env, cwd=dest, check=True)
 subprocess.run([str(bindir/'horizon-crg-native.exe'), str(dest/'examples/demo/blocks.json'), str(dest/'examples/demo/pool'), str(acceptance/'packaged-roundtrip')], env=env, cwd=dest, check=True)
 shutil.make_archive(str(root/'dist/horizon-crg-windows'), 'zip', root_dir=dest.parent, base_dir=dest.name)

@@ -26,7 +26,7 @@ meson compile -C build horizon-crg-tests
 HORIZON_POOL="$PWD/examples/crg/demo/pool" ./build/horizon-imp -c examples/crg/demo/blocks.json examples/crg/demo/pictures
 ```
 
-For a packaged build: Windows double-click `open-demo.bat`; Linux run `bash open-demo.sh`. The preparation tool indexes the example pool and checks native load → connectivity expansion → save → reopen → expectation equality. It writes round-trip files under `validation`.
+For a packaged build: Windows double-click `open-demo.bat`; Linux run `bash open-demo.sh`. The launcher indexes the example pool, then opens the editable example. It allows structurally incomplete work to reopen for correction. Separately, the full `horizon-crg-native` command above checks native load → connectivity expansion → save → reopen → expectation equality and writes its round-trip files under `validation`.
 
 The diagram uses named native nets to connect short wire stubs. Place/move/connect objects using standard Horizon operations. Select one component and open the hamburger menu → **CRG component properties…**. Edit its kind, semantic roles and parameters. Apply, save, reopen and check that the properties are retained. Properties belong to the block definition; edits affect all its instances.
 
